@@ -1,12 +1,12 @@
 from flask import Flask
-from flask import render_template
+from server.views import PageRoutes
 
 # Constants
 TEMPLATES_DIR: str = "server/templates"
 STATIC_DIR: str = "server/static"
 
+# Create the Flask server.
 app = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+# Register the routes for page views.
+app.register_blueprint(PageRoutes)
