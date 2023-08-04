@@ -96,7 +96,6 @@ class DatabaseHandler:
         """
         self.db_cursor.execute(f"SELECT {column_names} FROM {table_name} {extras}")
         rows = self.db_cursor.fetchall()
-        self.db_conn.close()
         return rows
 
 # This is a singleton pattern implementation.

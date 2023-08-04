@@ -45,3 +45,24 @@ class ProjectManagersHandler:
         return self.db_handler.get_columns_from_table(
             self.TABLE_NAME, self.COLUMN_LINK, extra_condition
         )
+
+    def get_all_information(self) -> dict:
+        """Return a list of people information where
+        each element is a dictionary.
+        :return: A dictionary of people information.
+        """
+        # Receive the all information of all project managers.
+        people = self.db_handler.get_columns_from_table(self.TABLE_NAME, "*")
+        # Since the information is list of tuples, we need to convert it to a 
+        # list of dictionaries.
+        people_information = []
+        for person in people:
+            person_information = {
+                "name_surname": person[0],
+                "profile_img_location": person[1],
+                "description": person[2],
+                "social_link": person[3],
+            }
+            people_information.append(person_information)
+
+        return people_information

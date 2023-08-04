@@ -1,5 +1,6 @@
 from flask import Blueprint
 from flask import render_template
+from database import ProjectManagersHandler
 
 # This route is for serving the HTML files.
 PageRoutes = Blueprint('PageRoutes', __name__)
@@ -10,7 +11,9 @@ def index():
 
 @PageRoutes.route('/about-us', methods=['GET'])
 def about_us():
-    return render_template('about_us.html')
+    # Retrieve the project managers from the database.
+    project_managers = ProjectManagersHandler().get_all_information()
+    return render_template('about_us.html', members=project_managers)
 
 @PageRoutes.route('/project-details', methods=['GET'])
 def project_details():
