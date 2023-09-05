@@ -15,6 +15,10 @@ def about_us():
     project_managers = ProjectManagersHandler().get_all_information()
     return render_template('about_us.html', members=project_managers)
 
-@PageRoutes.route('/project-details', methods=['GET'])
+@PageRoutes.route('/project_details', methods=['GET'])
 def project_details():
     return render_template('project_details.html')
+
+@PageRoutes.route('/dashboard', methods=['GET'])
+def dashboard():
+    return render_template('dashboard.html')
