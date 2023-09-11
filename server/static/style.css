@@ -1,4 +1,6 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+@import "https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css";
+@import "https://fonts.cdnfonts.com/css/garet";
 
 .details_container {
     display: grid;
@@ -18,22 +20,17 @@
   .details_text {
     font-size: 30px;
     padding-left: 20px;
+    font-family: 'Garet', sans-serif;
   }
 
-.new_img {
-    opacity: 0.5;
-  }
+.tile {
+  align-items: center;
+  margin:auto;
+}
 
-
-.container_background {
-    position: relative;
-    text-align: center;
-    color: black;
-    margin-bottom: 100px;
-  }
-  .centered {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
+.subtitle{
+  font-family: 'Garet', sans-serif;
+}
+.title{
+  font-family: 'Garet', sans-serif;
+}
