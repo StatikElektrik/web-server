@@ -1,9 +1,68 @@
 {% extends 'partials/base.html' %}
 
 {% block content %}
-<div class="columns">
-    <div class="column">
-        Nothing to show here...
+<div class="container is-max-widescreen">
+    <div class="columns is-centered">
+        <div class="column is-one-fifth">
+            <figure class="image is-2by1">
+                <img width="500" height="250" src="./static/images/ptai_logo.png" ></img>
+              </figure>
+        </div>
     </div>
 
+<section class="section is-small">
+    <div class="columns is-vcentered ">
+        <div class="column is-one-third">
+            <h1 class="title has-text-centered has-text-justify">PTAI is an AI tool for your company</h1>
+            <p class="subtitle ">Artificial Intelligence makes this progress more punctually!</p>
+        </div>
+        <div class="column" >
+            <img src="./static/images/index.png">
+            </div>
+        <div class="column">
+            <h1 class="title has-text-centered has-text-justify">PTAI manages companies' operations</h1>
+            <p class="subtitle ">In order to lose your time with glitches, we are warning you before happen!</p>
+        </div>
+      </div>
+</section>
+
+<section class="section is-small">
+    <div class="columns is-centered has-text-centered has-text-justify">
+        <div class="column">
+            <h1 class="title ">PTAI provides after sales support </h1>
+            <p class="subtitle ">Our team always work for you. You can reach us whenever you want!</p>
+        </div>
+       
+    </div>
+  </section>
+</div>
+    
+
+<div class="container is-max-widescreen">
+
+    <section class="section is-large">
+        <div class="columns">
+            <div class="column is-one-half">
+                <figure class="image is-2by1">
+                    <img width="500" height="250" src="./static/images/in_graph.png" ></img>
+                  </figure>
+            </div>
+            <div class="column is-one-half">
+                  <h1 class="title">What is PTAI ?</h1>
+                  <p class="subtitle">PTAI is an AI-based predictive maintenance optimization tool for company's operations. 
+                    With PTAI, you can minimize downtime, reduce maintenance costs, and maximize the efficiency of your operations.<br> 
+                    PTAI utilizes machine learning algorithms, IoT sensors, and predictive analytics to monitor the health of your vehicles and 
+                    predict when maintenance is needed before a breakdown occurs.</p>
+                    <div class="buttons is-centered">
+                        <a class="button is-dark" href="{{ url_for('PageRoutes.project_details')}}">Learn more</a>
+                    </div>
+
+            </div>
+        </div>
+    </section>
+
+</div>
+
 {% endblock %}
+
+
