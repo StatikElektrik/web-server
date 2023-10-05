@@ -27,7 +27,6 @@
   align-items: center;
   margin:auto;
 }
-
 .subtitle{
   font-family: 'Garet', sans-serif;
 }
@@ -53,4 +52,5 @@
 .th{
   font-family: 'Garet', sans-serif;
   text-align: center;
+
 }
