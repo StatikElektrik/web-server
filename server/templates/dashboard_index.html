@@ -1,0 +1,184 @@
+{% extends 'partials/dashboard.html' %}
+
+{% block content %}
+
+<script>
+    function myFunction() {
+      // Declare variables
+      var input, filter, table, tr, td, i, txtValue;
+      input = document.getElementById("myInput");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("myTable");
+      tr = table.getElementsByTagName("tr");
+    
+      // Loop through all table rows, and hide those who don't match the search query
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[1];
+        if (td) {
+          txtValue = td.textContent || td.innerText;
+          if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        }
+      }
+    }
+    
+    </script>
+
+   <div class="navbar-end">
+            <div class="navbar-item" >
+                <div class="buttons">
+                    <a class="button is-dark" href="{{ url_for('PageRoutes.index')}}"><strong>Logout</strong></a>
+                </div>
+            </div>
+        </div>
+  <div class="columns">
+    <div class="column is-8">
+        <div class="columns">
+            <div class="column is-one-third">
+                <div class="card has-background-grey-lighter">
+                    <header class="card-header ">
+                      <p class="card-header-title">
+                        Number of vehicles
+                      </p>
+                    </header>
+                    <div class="card-content has-text-weight-bold">
+                      <div class="content is-size-2 has-text-centered has-text-justify">
+                        155
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="column is-one-third">
+                <div class="card has-background-grey-lighter">
+                    <header class="card-header">
+                      <p class="card-header-title">
+                        Number of alerts
+                      </p>
+                    </header>
+                    <div class="card-content has-text-weight-bold">
+                      <div class="content is-size-2 has-text-centered has-text-justify ">
+                        25
+                      </div>
+                    </div>
+                  </div>
+            </div>
+
+            <div class="column is-one-third">
+                <div class="card has-background-grey-lighter">
+                    <header class="card-header">
+                      <p class="card-header-title">
+                        Number of high alerts
+                      </p>
+                    </header>
+                    <div class="card-content has-text-centered has-text-justify">
+                      <div class="content is-size-2 has-text-weight-bold">
+                        19
+                      </div>
+                    </div>
+                  </div>
+            </div>
+            
+
+        </div>
+        
+        <div class="field is-grouped">
+            <p class="control is-expanded">
+              <input class="input" type="text" id="myInput" onkeyup="myFunction()" placeholder="Find a vehicle from licence plate..."> 
+            </p>
+            <p class="control">
+              <a class="button is-light">
+                Search
+              </a>
+            </p>
+          </div>
+
+          <table class="table center is-bordered is-fullwidth" id="myTable">
+            <thead>
+              <tr>
+                <th><abbr title="Vehicle id">id</abbr></th>
+                <th>Class</th>
+                <th>License Plate</th>
+                <th>Route</th>
+                <th>Predicted Maintenance Date</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for vehicle in tools %}
+            <tr>
+              <th>{{vehicle.id}}</th>
+              <td>{{vehicle.class}}</td>
+              <td>{{vehicle.plate}}</td>
+              <td>{{vehicle.route}}</td>
+              <td>{{vehicle.pmdate}}</td>
+              <td>
+                  <a class="button is-info is-light" >
+                      View Details </a>
+              </td>
+            </tr>
+            {% endfor %}
+            </tbody>  
+          </table>
+    </div>
+
+        <div class="column is-4">
+            <div class="box">
+                      <p class="content">
+                        AI Suggestions
+                      </p>
+                    </header>
+                    <article class="media">
+                      <figure class="media-left">
+                        <p class="image is-64x64">
+                          <img src="https://bulma.io/images/placeholders/128x128.png">
+                        </p>
+                      </figure>
+                      <div class="media-content">
+                        <div class="content">
+                          <p>
+                            <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
+                            <br>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+                          </p>
+                        </div>
+                        <nav class="level is-mobile">
+                          <div class="level-left">
+                            <a class="level-item">
+                              <span class="icon is-small"><i class="fas fa-reply"></i></span>
+                            </a>
+                            <a class="level-item">
+                              <span class="icon is-small"><i class="fas fa-retweet"></i></span>
+                            </a>
+                            <a class="level-item">
+                              <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                            </a>
+                          </div>
+                        </nav>
+                      </div>
+                      <div class="media-right">
+                        <button class="delete"></button>
+                      </div>
+                    </article>
+              </div>
+            
+              <div class="box">
+                <div class="card">
+                    <header class="card-header">
+                      <p class="card-header-title">
+                        Help Desk
+                      </p>
+                    </header>
+                    <div class="card-content">
+                      <a class="button is-info is-light" href="#">
+                        Contact with driver </a>
+                      <a class="button is-info is-light" href="#">
+                        Contact with PTAI </a>
+                      </div>
+                  </div>
+              </div>
+        </div>
+    </div>
+
+{% endblock %}
