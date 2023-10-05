@@ -1,8 +1,8 @@
 {% extends 'partials/base.html' %}
 
 {% block content %}
-<div class="container is-max-widescreen">
-    <div class="columns is-centered">
+<div class="container is-widescreen ">
+    <div class="columns is-centered is-mobile">
         <div class="column is-one-fifth">
             <figure class="image is-2by1">
                 <img width="500" height="250" src="./static/images/ptai_logo.png" ></img>
@@ -11,7 +11,7 @@
     </div>
 
 <section class="section is-small">
-    <div class="columns is-vcentered ">
+    <div class="columns is-vcentered is-mobile">
         <div class="column is-one-third">
             <h1 class="title has-text-centered has-text-justify">PTAI is an AI tool for your company</h1>
             <p class="subtitle ">Artificial Intelligence makes this progress more punctually!</p>
@@ -27,7 +27,7 @@
 </section>
 
 <section class="section is-small">
-    <div class="columns is-centered has-text-centered has-text-justify">
+    <div class="columns is-centered has-text-centered has-text-justify is-mobile">
         <div class="column">
             <h1 class="title ">PTAI provides after sales support </h1>
             <p class="subtitle ">Our team always work for you. You can reach us whenever you want!</p>
@@ -38,7 +38,7 @@
 </div>
     
 
-<div class="container is-max-widescreen">
+<div class="container ">
 
     <section class="section is-large">
         <div class="columns">
@@ -63,27 +63,27 @@
 
 </div>
 
-<div class="container is-max-widescreen">
-    <section class="section is-medium">
+<div class="container has-background-white-ter">
         <div class="title has-text-centered">
             Sustainable Development Goals
         </div>
-        <div class="columns is-one-fifth is-centered">
+        <div class="columns is mobile is-centered ">
             <div class="column">
-            </div>
-            <div class="column">
+                <figure class="image is-1by1">
                     <img src="./static/images/SDG/SDG-8.svg" ></img>
+                </figure>
             </div>
             <div class="column">
-                <img src="./static/images/SDG/SDG-9.svg" ></img>
+                <figure class="image is-1by1">
+                    <img src="./static/images/SDG/SDG-9.svg" ></img>
+                </figure>
             </div>
             <div class="column">
-                <img src="./static/images/SDG/SDG-11.svg" ></img>
-            </div>
-            <div class="column">
+                <figure class="image is-1by1">
+                    <img src="./static/images/SDG/SDG-11.svg" ></img>
+                </figure>
             </div>
         </div>
-    </section>
 </div>
 
 {% endblock %}
