@@ -30,3 +30,16 @@ def dashboard():
 @PageRoutes.route('/vehicle_details', methods=['GET'])
 def vehicle_details():
     return render_template('vehicle_details.html')
+
+###############   AUTHENTICATION METHODS  #####################
+@PageRoutes.route('/login', methods=['GET'])
+def login():
+    return render_template('auth/login.html')
+
+@PageRoutes.route('/signup', methods=['GET'])
+def signup():
+    return render_template('auth/signup.html')
+
+
+
+
