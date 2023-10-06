@@ -27,10 +27,30 @@
   align-items: center;
   margin:auto;
 }
-
 .subtitle{
   font-family: 'Garet', sans-serif;
 }
 .title{
   font-family: 'Garet', sans-serif;
+}
+.content{
+  font-family: 'Garet', sans-serif;
+}
+.card-content{
+  font-family: 'Garet', sans-serif;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+.td{
+  font-family: 'Garet', sans-serif;
+  text-align: center;
+}
+
+.th{
+  font-family: 'Garet', sans-serif;
+  text-align: center;
+
 }

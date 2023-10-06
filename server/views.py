@@ -1,6 +1,8 @@
 from flask import Blueprint
 from flask import render_template
-from database import ProjectManagersHandler
+
+
+from database import ProjectManagersHandler,VehiclesHandler
 
 # This route is for serving the HTML files.
 PageRoutes = Blueprint('PageRoutes', __name__)
@@ -21,4 +23,10 @@ def project_details():
 
 @PageRoutes.route('/dashboard', methods=['GET'])
 def dashboard():
-    return render_template('dashboard.html')
+    # Retrieve the vehicles from the database
+    vehicles=VehiclesHandler().get_all_information()
+    return render_template('dashboard_index.html',tools=vehicles)
+
+@PageRoutes.route('/vehicle_details', methods=['GET'])
+def vehicle_details():
+    return render_template('vehicle_details.html')
