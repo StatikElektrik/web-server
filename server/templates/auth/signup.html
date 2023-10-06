@@ -2,14 +2,15 @@
 
 {% block content %}
 <div class="container">
-    <form class="box custom-box is-centered">
-        <div class="field">
+    <form class="box custom-box" action="{{ url_for('PageRoutes.register')}}" method="post">
+        
+      <div class="field">
             <label class="label">Name Surname</label>
             <div class="control has-icons-left">
                 <span class="icon is-small is-left">
                     <i class="mdi mdi-account"></i>
                   </span>
-              <input class="input" type="text" placeholder="e.g. Alex Wick">
+              <input class="input" type="text" id="name_surname" name="name_surname" placeholder="e.g. Alex Wick">
             </div>
           </div>
         
@@ -19,7 +20,7 @@
                 <span class="icon is-small is-left">
                     <i class="mdi mdi-domain"></i>
                   </span>
-              <input class="input" type="text" placeholder="e.g. Controlix">
+              <input class="input" type="text" id="company" name="company" placeholder="e.g. Controlix">
             </div>
           </div>
           
@@ -29,7 +30,7 @@
             <span class="icon is-small is-left">
                 <i class="mdi mdi-email"></i>
               </span>
-            <input class="input" type="email" placeholder="e.g. alex@example.com">
+            <input class="input" type="email" id="email" name="email" placeholder="e.g. alex@example.com">
           </div>
         </div>
       
@@ -39,7 +40,7 @@
             <span class="icon is-small is-left">
                 <i class="mdi mdi-lock"></i>
               </span>
-            <input class="input" type="password" placeholder="********">
+            <input class="input" type="password" id="password" name="password" placeholder="********">
           </div>
         </div>
     
@@ -56,13 +57,12 @@
                 No
               </label>
             </div>
-          </div>
+          </div> 
       
-          <div class="buttons">
-            <a class="button is-primary" href="{{ url_for('PageRoutes.signup')}}"><strong>Signup</strong></a>
-        </div>
+          <div class="buttons" >
+            <a class="button is-primary" type="submit"  href="{{ url_for('PageRoutes.login')}}"><strong>Signup</strong></a>
+        </div> 
       </form>
-
 </div>
 
 

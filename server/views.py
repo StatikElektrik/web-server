@@ -1,8 +1,8 @@
 from flask import Blueprint
-from flask import render_template
+from flask import render_template, request, redirect, url_for
 
 
-from database import ProjectManagersHandler,VehiclesHandler
+from database import ProjectManagersHandler,VehiclesHandler, UsersHandler, DatabaseHandler
 
 # This route is for serving the HTML files.
 PageRoutes = Blueprint('PageRoutes', __name__)
@@ -40,6 +40,19 @@ def login():
 def signup():
     return render_template('auth/signup.html')
 
+@PageRoutes.route('/register', methods=['POST'])
+def register():
+
+    user_data = {
+        'COLUMN_NAME': request.form['name_surname'],
+        'COLUMN_COMP': request.form['company'],
+        'COLUMN_MAIL': request.form['email'],
+        'COLUMN_PASSWORD': request.form['password']
+    }
+
+    DatabaseHandler.insert_into_table('Users', user_data)
+
+    return render_template('auth/login.html')
 
 
 
