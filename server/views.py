@@ -1,8 +1,8 @@
 from flask import Blueprint
 from flask import render_template, request, redirect, url_for, flash
 
-from database import ProjectManagersHandler,VehiclesHandler, UsersHandler, DatabaseHandler
-from database.DatabaseHandler import create_database_handler
+from database import ProjectManagersHandler,VehiclesHandler, UsersHandler
+
 # This route is for serving the HTML files.
 PageRoutes = Blueprint('PageRoutes', __name__)
 
@@ -38,15 +38,14 @@ def login():
 @PageRoutes.route('/signup', methods=['GET','POST'])
 def signup():
     if request.method == 'POST':
-        user_data = {
-        'COLUMN_NAME': request.form['name_surname'],
-        'COLUMN_COMP': request.form['company'],
-        'COLUMN_MAIL': request.form['email'],
-        'COLUMN_PASSWORD': request.form['password']
-    }
-        print(user_data)
-        veri=create_database_handler()
-        veri.insert_into_table('Users', user_data)
+        name_surname=request.form['name_surname']
+        company=request.form['company']
+        email=request.form['email']
+        password=request.form['password']
+
+        new_user=[name_surname,company,email,password]
+        UsersHandler.insert_user(new_user)
+
         return redirect(url_for("PageRoutes.login"))
     else:
         return render_template('auth/signup.html')

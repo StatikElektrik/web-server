@@ -1,5 +1,5 @@
 from typing import List
-from database import create_database_handler, DatabaseHandler
+from database import create_database_handler
 
 
 class UsersHandler:
@@ -27,13 +27,13 @@ class UsersHandler:
             self.TABLE_NAME, self.COLUMN_MAIL, extra_condition
         )
 
-
-    #def insert_user(self, name_surname: str, company: str, email: str, password: str) ->None:
-    #    """Insert a user record into the 'Users' table."""
-    #    insert_query = """
-    #    INSERT INTO users (COLUMN_ID,COLUMN_NAME, COLUMN_COMP COLUMN_MAIL, COLUMN_PASSWORD)
-    #    VALUES (1,%s, %s, %s, %s)
-    #    """
-    #    db_cursor.execute(insert_query, (name_surname, company, email, password))
-    #    create_database_handler.commit()
-
+    def insert_user( user_info: list) ->None:
+        # Insert the new user.
+        user_data = {
+        'COLUMN_NAME': user_info[0],
+        'COLUMN_COMP': user_info[1],
+        'COLUMN_MAIL': user_info[2],
+        'COLUMN_PASSWORD': user_info[3]
+        }
+        veri=create_database_handler()
+        veri.insert_into_table('Users',user_data)

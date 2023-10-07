@@ -86,18 +86,18 @@ class DatabaseHandler:
         pass
         #self.db_cursor.execute(f"INSERT INTO {table_name} ({record_type}) VALUES ({record})")
 
-    #@with_cursor
-    #def insert_into_table(self, table_name: str, column_values: dict):
-    #    """Insert values into a table dynamically."""
-    #    columns = ', '.join(column_values.keys())
-    #    placeholders = ', '.join('%s' for _ in column_values.values())
-    #    values = tuple(column_values.values())
-#
-    #    insert_query = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
-    #    
-    #    self.db_cursor.execute(insert_query, values)
-    #    self.db_conn.commit()
-    #    self.db_conn.rollback()
+    @with_cursor
+    def insert_into_table(self, table_name: str, column_values: dict):
+        """Insert values into a table dynamically."""
+        columns = ', '.join(column_values.keys())
+        placeholders = ', '.join('%s' for _ in column_values.values())
+        values = tuple(column_values.values())
+
+        insert_query = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
+        
+        self.db_cursor.execute(insert_query, values)
+        self.db_conn.commit()
+        self.db_conn.rollback()
 
     @with_cursor
     def get_columns_from_table(
