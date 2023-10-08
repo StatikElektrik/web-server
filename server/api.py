@@ -1,7 +1,7 @@
 from flask import Blueprint
 from flask import jsonify
 
-from analysis import AnalysisUtils, PredictiveMaintainance
+from analysis import PredictiveMaintainance
 from database import ProjectManagersHandler
 
 # This route is for serving the REST/CoAP API

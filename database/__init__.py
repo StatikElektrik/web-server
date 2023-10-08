@@ -4,9 +4,9 @@ from .VehiclesHandler import VehiclesHandler
 from .UsersHandler import UsersHandler
 
 __all__ = [
-    "DatabaseSettings"
+    "DatabaseSettings",
     "create_database_handler",
     "ProjectManagersHandler",
     "VehiclesHandler",
-    "UsersHandler"
+    "UsersHandler",
 ]

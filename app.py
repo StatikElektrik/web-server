@@ -14,7 +14,7 @@ STATIC_DIR: str = "server/static"
 # Create the Flask server.
 app = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
 
-#Secret key
+# Secret key
 secret_key = os.environ.get('SECRET_KEY')
 app.secret_key = secret_key
 

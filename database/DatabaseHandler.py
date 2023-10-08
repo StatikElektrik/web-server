@@ -1,5 +1,4 @@
 from attrs import define
-from functools import wraps
 import psycopg2
 
 
@@ -75,8 +74,7 @@ class DatabaseHandler:
         self.db_cursor = None
 
     @with_cursor
-    def create_table(
-        self,table_name:str,column_names:str,) -> None:
+    def create_table(self, table_name: str, column_names: str) -> None:
         """Create a table in the database."""
         pass
 
@@ -84,17 +82,17 @@ class DatabaseHandler:
     def insert_record(self, record_type: str, record: dict) -> None:
         """Insert a record into the database."""
         pass
-        #self.db_cursor.execute(f"INSERT INTO {table_name} ({record_type}) VALUES ({record})")
+        # self.db_cursor.execute(f"INSERT INTO {table_name} ({record_type}) VALUES ({record})")
 
     @with_cursor
     def insert_into_table(self, table_name: str, column_values: dict):
         """Insert values into a table dynamically."""
-        columns = ', '.join(column_values.keys())
-        placeholders = ', '.join('%s' for _ in column_values.values())
+        columns = ", ".join(column_values.keys())
+        placeholders = ", ".join("%s" for _ in column_values.values())
         values = tuple(column_values.values())
 
         insert_query = f"INSERT INTO {table_name} ({columns}) VALUES ({placeholders})"
-        
+
         self.db_cursor.execute(insert_query, values)
         self.db_conn.commit()
         self.db_conn.rollback()
@@ -143,6 +141,6 @@ def create_database_handler(settings: DatabaseSettings = None) -> DatabaseHandle
             raise ValueError("Database settings not provided.")
         # Create the DatabaseHandler instance.
         create_database_handler.database_handler = DatabaseHandler(settings)
-    
+
     # Return the DatabaseHandler instance that is created before.
     return create_database_handler.database_handler

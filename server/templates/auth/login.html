@@ -3,40 +3,36 @@
 {% block content %}
 <div class="container">
   {% with messages = get_flashed_messages() %}
- {% if messages %}
-    <div class="notification is-success">
-        {{ messages[0] }}.
-    </div>
- {% endif %}
-{% endwith %}
-<form action="/login" method="post" class="box custom-box is-centered">
+  {% if messages %}
+  <div class="notification is-success">
+    {{ messages[0] }}.
+  </div>
+  {% endif %}
+  {% endwith %}
+  <form action="/login" method="post" class="box custom-box is-centered">
     <div class="field is-vcentered">
       <label class="label">Email</label>
       <div class="control has-icons-left">
         <span class="icon is-small is-left">
-            <i class="mdi mdi-email"></i>
-          </span>
+          <i class="mdi mdi-email"></i>
+        </span>
         <input class="input" type="email" name="email" placeholder="e.g. alex@example.com">
       </div>
     </div>
-  
+
     <div class="field">
       <label class="label">Password</label>
       <div class="control has-icons-left">
         <span class="icon is-small is-left">
-            <i class="mdi mdi-lock"></i>
-          </span>
+          <i class="mdi mdi-lock"></i>
+        </span>
         <input class="input" type="password" name="password" placeholder="********">
       </div>
     </div>
-    
-    <div>
-      <input type="checkbox" name="remember" value="1"> Remember me
-    </div>
-  
+
     <div class="buttons">
-        <input class="button is-primary" type="submit" value="Login">
-        <p class="content"> Don't you have an account? <a href="{{ url_for('PageRoutes.signup')}}">Signup</a></p>
+      <input class="button is-primary" type="submit" value="Login">
+      <p class="content"> Don't you have an account? <a href="{{ url_for('PageRoutes.signup')}}">Signup</a></p>
     </div>
   </form>
 
