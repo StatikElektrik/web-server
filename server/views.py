@@ -60,7 +60,7 @@ def login():
             flash("Please check your login details and try again.")
             return redirect(url_for("PageRoutes.login"))
         else:
-            return render_template("dashboard_index.html", user=user)
+            return redirect(url_for("PageRoutes.dashboard"))
     else:
         return render_template("auth/login.html")
 
