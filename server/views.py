@@ -11,6 +11,7 @@ from functools import wraps
 # This route is for serving the HTML files.
 PageRoutes = Blueprint("PageRoutes", __name__)
 
+
 def login_required(route_function):
     @wraps(route_function)
     def decorated_function(*args, **kwargs):
@@ -39,14 +40,6 @@ def about_us():
 def project_details():
     """It provides the project details page."""
     return render_template("project_details.html")
-
-def login_required(view_function):
-    @wraps(view_function)
-    def wrapper(*args, **kwargs):
-        if not session.get('logged_in'):
-            return redirect(url_for('PageRoutes.login'))  # Redirect to the login page
-        return view_function(*args, **kwargs)
-    return wrapper
 
 
 @PageRoutes.route("/dashboard", methods=["GET"])
@@ -110,6 +103,7 @@ def signup():
             return redirect(url_for("PageRoutes.login"))
     else:
         return render_template("auth/signup.html")
+
 
 @PageRoutes.route('/logout')
 def logout():
