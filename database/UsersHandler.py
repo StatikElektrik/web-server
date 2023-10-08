@@ -1,8 +1,7 @@
 from typing import List
 from database import create_database_handler
 
-
-class UsersHandler:
+class UsersHandler():
     """This class handles all database interactions related to the users."""
 
     TABLE_NAME: str = "Users"
@@ -26,7 +25,7 @@ class UsersHandler:
             self.TABLE_NAME, self.COLUMN_MAIL
         )
 
-    def insert_user(self, user_info: list) ->None:
+    def register_user(self, user_info: list) ->None:
         # Insert the new user.
         user_data = {
         'COLUMN_NAME': user_info[0],
@@ -42,3 +41,12 @@ class UsersHandler:
         return self.db_handler.check_value_exists(
             self.TABLE_NAME, "COLUMN_MAIL", email_to_check
             )
+
+    def get_hash_password(self, email: str) -> list[str]:
+        # Receive the hash-password of user.
+        extra_condition = self._where_on_column('COLUMN_MAIL', email)
+
+        passw :list = self.db_handler.get_columns_from_table(
+            self.TABLE_NAME, 'COLUMN_PASSWORD', extra_condition
+        )
+        return passw[0][0]
