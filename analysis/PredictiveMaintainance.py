@@ -4,6 +4,7 @@ and dashboard visualization.
 """
 from typing import Any
 
+
 class PredictiveMaintainance:
     def __init__(self) -> None:
         pass

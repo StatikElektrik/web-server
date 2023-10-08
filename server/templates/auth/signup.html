@@ -1,0 +1,77 @@
+{% extends 'auth/base.html' %}
+
+{% block content %}
+<div class="container">
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <div class="notification is-danger">
+    {{ messages[0] }}. Go to <a href="{{ url_for('PageRoutes.login') }}">login page</a>.
+  </div>
+  {% endif %}
+  {% endwith %}
+
+  <form class="box custom-box" action="/signup" method="post">
+    <div class="field">
+      <label class="label">Name Surname</label>
+      <div class="control has-icons-left">
+        <span class="icon is-small is-left">
+          <i class="mdi mdi-account"></i>
+        </span>
+        <input class="input" required type="text" name="name_surname" placeholder="e.g. Alex Wick">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Company</label>
+      <div class="control has-icons-left">
+        <span class="icon is-small is-left">
+          <i class="mdi mdi-domain"></i>
+        </span>
+        <input class="input" required type="text" name="company" placeholder="e.g. Controlix">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Email</label>
+      <div class="control has-icons-left">
+        <span class="icon is-small is-left">
+          <i class="mdi mdi-email"></i>
+        </span>
+        <input class="input" type="email" required name="email" placeholder="e.g. alex@example.com">
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Password</label>
+      <div class="control has-icons-left">
+        <span class="icon is-small is-left">
+          <i class="mdi mdi-lock"></i>
+        </span>
+        <input class="input" type="password" required name="password" placeholder="********">
+      </div>
+    </div>
+
+
+    <div class="field">
+      I agree to the <a href="#">terms and conditions</a>
+      <div class="control">
+        <label class="radio">
+          <input type="radio" name="question">
+          Yes
+        </label>
+        <label class="radio">
+          <input type="radio" name="question">
+          No
+        </label>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <input class="button is-primary" type="submit" value="Signup">
+    </div>
+  </form>
+</div>
+
+
+{%endblock%}

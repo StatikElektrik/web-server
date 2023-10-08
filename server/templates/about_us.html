@@ -3,28 +3,30 @@
 {% block content %}
 <div class="columns">
     {% for member in members %}
-        <div class="column">
-            <div class="card">
-                <div class="card-image">
-                    <figure class="image is-4by3">
-                        <img src="{{member.profile_img_location}}">
-                    </figure>
+    <div class="column">
+        <div class="card">
+            <div class="card-image">
+                <figure class="image is-4by3">
+                    <img src="{{member.profile_img_location}}">
+                </figure>
+            </div>
+            <div class="card-content">
+                <div class="media">
+                    <div class="media-content">
+                        <p class="title is-4">{{member.name_surname}}</p>
+                        <a href="https://linkedin.com/in/{{member.social_link}}">
+                            <p class="subtitle is-6">@{{member.social_link}}</p>
+                        </a>
+                    </div>
                 </div>
-                <div class="card-content">
-                    <div class="media">
-                        <div class="media-content">
-                            <p class="title is-4">{{member.name_surname}}</p>
-                            <a href="https://linkedin.com/in/{{member.social_link}}"><p class="subtitle is-6">@{{member.social_link}}</p></a>
-                        </div>
-                    </div>
-            
-                    <div class="content">
-                        {{member.description}}
-                        <br>
-                    </div>
+
+                <div class="content">
+                    {{member.description}}
+                    <br>
                 </div>
             </div>
         </div>
+    </div>
     {% endfor %}
 </div>
 

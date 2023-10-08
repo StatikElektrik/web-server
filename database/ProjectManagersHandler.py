@@ -1,4 +1,3 @@
-from typing import List
 from database import create_database_handler
 
 
@@ -53,7 +52,7 @@ class ProjectManagersHandler:
         """
         # Receive the all information of all project managers.
         people = self.db_handler.get_columns_from_table(self.TABLE_NAME, "*")
-        # Since the information is list of tuples, we need to convert it to a 
+        # Since the information is list of tuples, we need to convert it to a
         # list of dictionaries.
         people_information = []
         for person in people:

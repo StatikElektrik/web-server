@@ -23,6 +23,11 @@
     font-family: 'Garet', sans-serif;
   }
 
+.custom-box{
+  width: 50% ;
+  margin: 0 auto; /* Yatayda ortala */;
+}
+
 .tile {
   align-items: center;
   margin:auto;

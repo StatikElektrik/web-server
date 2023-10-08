@@ -7,11 +7,10 @@
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
     <link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename= 'sidebar.css') }}" />
 
     <title>{% block title %} {% endblock %}</title>
 </head>
-{%include 'partials/sidebar.html'%}
+{%include 'partials/navbar.html'%}
 
 <body>
     <!--{% include 'partials/navbar.html' %}-->

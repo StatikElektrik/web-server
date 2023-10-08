@@ -1,4 +1,3 @@
-from typing import List
 from database import create_database_handler
 
 
@@ -10,8 +9,8 @@ class VehiclesHandler:
     COLUMN_CLASS: str = "class"
     COLUMN_PLATE: str = "plate"
     COLUMN_ROUTE: str = "route"
-    COLUMN_PMDATE: str = "pmdate"  #Predicted Maintenance Date
-    #COLUMN_NOT: str ="notification"
+    COLUMN_PMDATE: str = "pmdate"  # Predicted Maintenance Date
+    # COLUMN_NOT: str ="notification"
 
     def __init__(self) -> None:
         # Holds the database handler.
@@ -24,7 +23,7 @@ class VehiclesHandler:
         """
         # Receive the all information of all vehicles.
         vehicles = self.db_handler.get_columns_from_table(self.TABLE_NAME, "*")
-        # Since the information is list of tuples, we need to convert it to a 
+        # Since the information is list of tuples, we need to convert it to a
         # list of dictionaries.
         vehicles_information = []
         for vehicle in vehicles:
@@ -34,7 +33,7 @@ class VehiclesHandler:
                 "plate": vehicle[2],
                 "route": vehicle[3],
                 "pmdate": vehicle[4],
-                #"notification":vehicle[5]
+                # "notification":vehicle[5]
             }
             vehicles_information.append(vehicle_information)
 
