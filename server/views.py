@@ -2,6 +2,7 @@ from flask import Blueprint
 from flask import render_template, request, redirect, url_for, flash
 from werkzeug.security import generate_password_hash, check_password_hash
 from database import ProjectManagersHandler,VehiclesHandler, UsersHandler
+from flask_login import LoginManager,UserMixin,login_user
 
 # This route is for serving the HTML files.
 PageRoutes = Blueprint('PageRoutes', __name__)
@@ -31,9 +32,22 @@ def vehicle_details():
     return render_template('vehicle_details.html')
 
 ###############   AUTHENTICATION METHODS  #####################
-@PageRoutes.route('/login', methods=['GET'])
+@PageRoutes.route('/login', methods=['GET','POST'])
 def login():
-    return render_template('auth/login.html')
+    if request.method =='POST':
+        email=request.form['email']
+        password=request.form['password']
+        remember = True if request.form.get('remember') else False
+
+        User=UsersHandler()
+        user_exist = User.check_email(email)
+        if not user_exist or not check_password_hash(User.get_hash_password(email), password):
+            flash('Please check your login details and try again.')
+            return redirect(url_for('PageRoutes.login'))
+        else:
+            return render_template('dashboard_index.html',user=User)
+    else:
+        return render_template('auth/login.html')
 
 @PageRoutes.route('/signup', methods=['GET','POST'])
 def signup():
@@ -52,11 +66,9 @@ def signup():
             return redirect(url_for("PageRoutes.signup"))
         else:
             new_user=[name_surname,company,email,password]
-            User.insert_user(new_user)
+            User.register_user(new_user)
             flash('User registered successfully!')
             return redirect(url_for("PageRoutes.login"))
-
-        
     else:
         return render_template('auth/signup.html')
 
