@@ -25,6 +25,37 @@
     }
   }
 
+  document.addEventListener('DOMContentLoaded', function () {
+  const table = document.getElementById('myTable');
+  const tbody = table.querySelector('tbody');
+  const sortDate = document.getElementById('sortDate');
+  let ascending = true;
+
+  function sortTable() {
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+
+    rows.sort((a, b) => {
+      const dateA = new Date(a.querySelector('td:nth-child(5)').textContent);
+      const dateB = new Date(b.querySelector('td:nth-child(5)').textContent);
+
+      if (ascending) {
+        return dateA - dateB;
+      } else {
+        return dateB - dateA;
+      }
+    });
+
+    tbody.innerHTML = '';
+    for (const row of rows) {
+      tbody.appendChild(row);
+    }
+
+    ascending = !ascending;
+  }
+
+  sortDate.addEventListener('click', sortTable);
+});
+
 </script>
 
 <div class="navbar-end">
@@ -96,14 +127,23 @@
       </p>
     </div>
 
-    <table class="table center is-bordered is-fullwidth" id="myTable">
+    <table class="table center is-bordered is-fullwidth table is-hoverable" id="myTable">
       <thead>
         <tr>
           <th><abbr title="Vehicle id">id</abbr></th>
           <th>Class</th>
           <th>License Plate</th>
           <th>Route</th>
-          <th>Predicted Maintenance Date</th>
+          <th>
+            <a id="sortDate" class="sortable-header">
+              <span class="icon-text ">
+                <span>Predicted Maintenance Date</span>
+                <span class="icon">
+                  <i class="mdi mdi-sort-calendar-descending mdi mdi-24px"></i>
+                </span>
+              </span>
+            </a>
+          </th>
         </tr>
       </thead>
       <tbody>
