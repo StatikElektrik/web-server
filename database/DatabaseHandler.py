@@ -112,7 +112,21 @@ class DatabaseHandler:
         self.db_cursor.execute(f"SELECT {column_names} FROM {table_name} {extras}")
         rows = self.db_cursor.fetchall()
         return rows
-    
+
+    @with_cursor
+    def check_value_exists(self, table_name: str, column_name: str, value: str) -> bool:
+        """Check if a value exists in a specific column of a table.
+
+        :param table_name: The name of the table.
+        :param column_name: The name of the column.
+        :param value: The value to check.
+        :return: True if the value exists, False otherwise.
+        """
+        self.db_cursor.execute(
+            f"SELECT COUNT(*) FROM {table_name} WHERE {column_name} = %s", (value,)
+        )
+        count = self.db_cursor.fetchone()[0]
+        return count > 0
 
 
 # This is a singleton pattern implementation.
