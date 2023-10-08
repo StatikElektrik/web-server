@@ -3,12 +3,22 @@ This module contains the routes for serving the HTML files.
 """
 
 from flask import Blueprint
-from flask import render_template, request, redirect, url_for, flash
+from flask import render_template, request, redirect, url_for, flash, session
 from werkzeug.security import generate_password_hash, check_password_hash
 from database import ProjectManagersHandler, VehiclesHandler, UsersHandler
+from functools import wraps
 
 # This route is for serving the HTML files.
 PageRoutes = Blueprint("PageRoutes", __name__)
+
+def login_required(route_function):
+    @wraps(route_function)
+    def decorated_function(*args, **kwargs):
+        if not session.get('logged_in'):
+            flash("Please log in to access this page.")
+            return redirect(url_for('PageRoutes.login'))
+        return route_function(*args, **kwargs)
+    return decorated_function
 
 
 @PageRoutes.route("/", methods=["GET"])
@@ -30,11 +40,22 @@ def project_details():
     """It provides the project details page."""
     return render_template("project_details.html")
 
+def login_required(view_function):
+    @wraps(view_function)
+    def wrapper(*args, **kwargs):
+        if not session.get('logged_in'):
+            return redirect(url_for('PageRoutes.login'))  # Redirect to the login page
+        return view_function(*args, **kwargs)
+    return wrapper
+
 
 @PageRoutes.route("/dashboard", methods=["GET"])
+@login_required
 def dashboard():
     """It provides the dashboard page."""
     # Retrieve the vehicles from the database
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
     vehicles = VehiclesHandler().get_all_information()
     return render_template("dashboard_index.html", tools=vehicles)
 
@@ -60,6 +81,7 @@ def login():
             flash("Please check your login details and try again.")
             return redirect(url_for("PageRoutes.login"))
         else:
+            session['logged_in'] = True
             return redirect(url_for("PageRoutes.dashboard"))
     else:
         return render_template("auth/login.html")
@@ -88,3 +110,8 @@ def signup():
             return redirect(url_for("PageRoutes.login"))
     else:
         return render_template("auth/signup.html")
+
+@PageRoutes.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('PageRoutes.login'))
