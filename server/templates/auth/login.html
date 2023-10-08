@@ -1,6 +1,14 @@
 {% extends 'auth/base.html' %}
 
 {% block content %}
+<div class="container">
+  {% with messages = get_flashed_messages() %}
+ {% if messages %}
+    <div class="notification is-success">
+        {{ messages[0] }}.
+    </div>
+ {% endif %}
+{% endwith %}
 <form class="box custom-box is-centered">
     <div class="field is-vcentered">
       <label class="label">Email</label>
@@ -27,5 +35,7 @@
         <p class="content"> Don't you have an account? <a href="{{ url_for('PageRoutes.signup')}}">Signup</a></p>
     </div>
   </form>
+
+</div>
 
 {%endblock%}

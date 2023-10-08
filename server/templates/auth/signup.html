@@ -2,7 +2,16 @@
 
 {% block content %}
 <div class="container">
-    <form class="box custom-box" action="" method="post">
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+      <div class="notification is-danger">
+          {{ messages[0] }}. Go to <a href="{{ url_for('PageRoutes.login') }}">login page</a>.
+      </div>
+  {% endif %}
+  {% endwith %}
+
+  <form class="box custom-box" action="/signup" method="post">
       <div class="field">
             <label class="label">Name Surname</label>
             <div class="control has-icons-left">
