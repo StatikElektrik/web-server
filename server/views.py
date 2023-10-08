@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask import render_template, request, redirect, url_for, flash
-
+from werkzeug.security import generate_password_hash, check_password_hash
 from database import ProjectManagersHandler,VehiclesHandler, UsersHandler
 
 # This route is for serving the HTML files.
@@ -42,11 +42,21 @@ def signup():
         company=request.form['company']
         email=request.form['email']
         password=request.form['password']
+        password=generate_password_hash(password, method='sha256')
+        User=UsersHandler()
 
-        new_user=[name_surname,company,email,password]
-        UsersHandler.insert_user(new_user)
+        #if this returns a user, then the email already exists
+        user_exist = User.check_email(email) 
+        if user_exist: # if a user exist
+            flash('Email address already exists')
+            return redirect(url_for("PageRoutes.signup"))
+        else:
+            new_user=[name_surname,company,email,password]
+            User.insert_user(new_user)
+            flash('User registered successfully!')
+            return redirect(url_for("PageRoutes.login"))
 
-        return redirect(url_for("PageRoutes.login"))
+        
     else:
         return render_template('auth/signup.html')
 
