@@ -20,14 +20,13 @@ class UsersHandler:
     def _where_on_column(self, column: str, name: str) -> str:
         return f"WHERE {column} = '{name}'"
     
-    def get_email(self, email: str) -> list[str]:
-        # Receive the email of a user.
-        extra_condition = self._where_on_column(self.COLUMN_NAME, name)
+    def get_emails(self, email: str) -> list[str]:
+        # Receive the emails of a user.
         return self.db_handler.get_columns_from_table(
-            self.TABLE_NAME, self.COLUMN_MAIL, extra_condition
+            self.TABLE_NAME, self.COLUMN_MAIL
         )
 
-    def insert_user( user_info: list) ->None:
+    def insert_user(self, user_info: list) ->None:
         # Insert the new user.
         user_data = {
         'COLUMN_NAME': user_info[0],
@@ -36,4 +35,10 @@ class UsersHandler:
         'COLUMN_PASSWORD': user_info[3]
         }
         veri=create_database_handler()
-        veri.insert_into_table('Users',user_data)
+        veri.insert_into_table(self.TABLE_NAME,user_data)
+
+    def check_email(self,email_to_check:str) -> bool:
+        # Check e-mail if exist
+        return self.db_handler.check_value_exists(
+            self.TABLE_NAME, "COLUMN_MAIL", email_to_check
+            )
