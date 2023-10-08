@@ -4,6 +4,7 @@ from server.views import PageRoutes
 from server.api import ApiRoutes
 from database import DatabaseSettings
 from database import create_database_handler
+import os
 
 # Constants
 ENV_CONFIGS: dict = dotenv_values(".env")
@@ -12,6 +13,10 @@ STATIC_DIR: str = "server/static"
 
 # Create the Flask server.
 app = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
+
+#Secret key
+secret_key = os.environ.get('SECRET_KEY')
+app.secret_key = secret_key
 
 # Create the database handler.
 database_settings = DatabaseSettings(
