@@ -54,11 +54,11 @@ class VehiclesHandler:
         """
         # Check if the dictionary contains the required keys.
         if not all(
-            key in device_info for key in ["device_id", "class", "plate", "last_date"]
+            key in device_info for key in ["device_id", "class", "plate", "route", "last_date"]
         ):
             raise ValueError(
                 "The device_info dictionary must contain the following keys: "
-                "device_id, class, plate, last_date"
+                "device_id, class, plate, route, last_date"
             )
 
         # Check if the device is registered.
@@ -71,6 +71,7 @@ class VehiclesHandler:
             self.COLUMN_DEVICEID: device_info["device_id"],
             self.COLUMN_CLASS: device_info["class"],
             self.COLUMN_PLATE: device_info["plate"],
+            self.COLUMN_ROUTE: device_info["route"],
             self.COLUMN_LASTDATE: device_info["last_date"],
         }
 

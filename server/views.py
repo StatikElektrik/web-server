@@ -142,6 +142,7 @@ def device_register():
         device_id = request.form["device_id"]
         vehicle_type = request.form["vehicle_type"]
         plate = request.form["plate"]
+        route = request.form["route"]
         last_date = request.form["last_date"]
 
         vehicles_handler = VehiclesHandler()
@@ -150,6 +151,7 @@ def device_register():
                 "device_id": device_id,
                 "class": vehicle_type,
                 "plate": plate,
+                "route": route,
                 "last_date": last_date,
             }
         )
