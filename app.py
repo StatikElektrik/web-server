@@ -1,10 +1,14 @@
+"""
+Main application layer for the server.
+"""
+
+import os
 from flask import Flask
 from dotenv import dotenv_values
 from server.views import PageRoutes
 from server.api import ApiRoutes
 from database import DatabaseSettings
 from database import create_database_handler
-import os
 
 # Constants
 ENV_CONFIGS: dict = dotenv_values(".env")

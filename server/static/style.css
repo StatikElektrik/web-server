@@ -49,6 +49,13 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.sortable-header {
+  color: black; /* Set the desired text color (e.g., black) */
+  text-decoration: none; /* Remove underlines */
+  cursor: pointer; /* Change the cursor to indicate it's clickable */
+}
+
 .td{
   font-family: 'Garet', sans-serif;
   text-align: center;
@@ -57,5 +64,4 @@
 .th{
   font-family: 'Garet', sans-serif;
   text-align: center;
-
 }

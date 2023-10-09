@@ -1,3 +1,7 @@
+"""
+This module defines an abstraction layer for accessing to database.
+"""
+
 from attrs import define
 import psycopg2
 
