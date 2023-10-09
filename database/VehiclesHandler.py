@@ -2,7 +2,8 @@
 This module handles all database interactions related to the project vehicles.
 """
 
-from database import create_database_handler, RegistrationStates
+from database import create_database_handler
+from .UsersHandler import RegistrationStates
 
 
 class VehiclesHandler:

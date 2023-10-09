@@ -20,7 +20,7 @@ class UsersHandler:
     TABLE_NAME: str = "Users"
     COLUMN_ID: int = "id"
     COLUMN_COMP: str = "company"
-    COLUMN_NAME: str = "name"
+    COLUMN_NAME: str = "name_surname"
     COLUMN_MAIL: str = "email"
     COLUMN_PASSWORD: str = "password"
 

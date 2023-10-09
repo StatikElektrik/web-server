@@ -56,15 +56,16 @@ def login():
         user = UsersHandler()
         user_exist = user.check_email(email)
         if not user_exist or not check_password_hash(
-            user.get_hash_password(email), password
+            user.get_password_hash(email), password
         ):
             flash("Please check your login details and try again.")
             return redirect(url_for("PageRoutes.login"))
         else:
             session["logged_in"] = True
             return redirect(url_for("PageRoutes.dashboard"))
-    else:
-        return render_template(url_for("PageRoutes.login"))
+
+    # If request made with GET, render the login page.
+    return render_template("auth/login.html")
 
 
 @PageRoutes.route("/signup", methods=["GET", "POST"])
@@ -100,7 +101,7 @@ def signup():
             flash("Something went wrong. Please try again.")
             return redirect(url_for("PageRoutes.signup"))
     else:
-        return render_template(url_for("PageRoutes.signup"))
+        return render_template("auth/signup.html")
 
 
 @PageRoutes.route("/dashboard", methods=["GET"])
@@ -155,13 +156,13 @@ def device_register():
 
         if result == RegistrationStates.NOT_REGISTERED:
             flash("Something went wrong. Please try again.")
-            return redirect(url_for("PageRoutes.register"))
+            return redirect(url_for("PageRoutes.device_register"))
         elif result == RegistrationStates.ALREADY_REGISTERED:
             flash("Device already registered.")
-            return redirect(url_for("PageRoutes.register"))
+            return redirect(url_for("PageRoutes.device_register"))
         elif result == RegistrationStates.SUCCESS:
             flash("Device registered successfully!")
             return redirect(url_for("PageRoutes.dashboard"))
 
     # Render the register page if request made with GET.
-    return render_template(url_for("PageRoutes.device_register"))
+    return render_template("register_device.html")
