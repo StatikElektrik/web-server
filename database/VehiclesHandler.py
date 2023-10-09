@@ -6,11 +6,12 @@ class VehiclesHandler:
 
     TABLE_NAME: str = "Vehicles"
     COLUMN_ID: int = "id"
+    COLUMN_DEVICEID: str = "device_id"
     COLUMN_CLASS: str = "class"
     COLUMN_PLATE: str = "plate"
     COLUMN_ROUTE: str = "route"
     COLUMN_PMDATE: str = "pmdate"  # Predicted Maintenance Date
-    # COLUMN_NOT: str ="notification"
+    COLUMN_LASTDATE: str= "last_date"
 
     def __init__(self) -> None:
         # Holds the database handler.
@@ -38,3 +39,14 @@ class VehiclesHandler:
             vehicles_information.append(vehicle_information)
 
         return vehicles_information
+    
+    def register_device(self, device_info: list) -> None:
+        # Register new device.
+        device_data = {
+            self.COLUMN_DEVICEID: device_info[0],
+            self.COLUMN_CLASS: device_info[1],
+            self.COLUMN_PLATE: device_info[2],
+            self.COLUMN_LASTDATE: device_info[3],
+        }
+        veri = create_database_handler()
+        veri.insert_into_table(self.TABLE_NAME, device_data)
