@@ -1,0 +1,54 @@
+{% extends 'partials/dashboard.html' %}
+
+{% block content %}
+
+<div class="container">
+  
+    <form class="box custom-box" action="/register" method="post">
+      <div class="field">
+        <label class="label">Device ID</label>
+        <div class="control has-icons-left">
+          <span class="icon is-small is-left">
+            <i class="mdi mdi-router-network-wireless"></i>
+          </span>
+          <input class="input" required type="text" name="device_id" placeholder="e.g. 15849876512">
+        </div>
+      </div>
+  
+      <div class="field">
+        <label class="label">Vehicle Type</label>
+        <div class="control has-icons-left">
+          <span class="icon is-small is-left">
+            <i class="mdi mdi-train-bus"></i>
+          </span>
+          <input class="input" required type="text" name="vehicle_type" placeholder="e.g. Bus">
+        </div>
+      </div>
+  
+      <div class="field">
+        <label class="label">Vehicle Licence Plate</label>
+        <div class="control has-icons-left">
+          <span class="icon is-small is-left">
+            <i class="mdi mdi-card-text-outline"></i>
+          </span>
+          <input class="input" type="text" required name="plate" placeholder="e.g. 34KLM35">
+        </div>
+      </div>
+  
+      <div class="field">
+        <label class="label">Last Maintenance Date</label>
+        <div class="control has-icons-left">
+          <span class="icon is-small is-left">
+            <i class="mdi mdi-calendar-range"></i>
+          </span>
+          <input class="input" type="date" required name="last_date">
+        </div>
+      </div>
+
+      <div class="buttons">
+        <input class="button is-primary" type="submit" value="Register">
+      </div>
+    </form>
+  </div>
+
+{% endblock %}
