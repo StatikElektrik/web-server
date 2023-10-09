@@ -109,3 +109,24 @@ def signup():
 def logout():
     session.clear()
     return redirect(url_for('PageRoutes.login'))
+
+@PageRoutes.route('/dashboard/register', methods=["GET", "POST"])
+@login_required
+def register():
+    if request.method=='POST':
+        
+        if not session.get('logged_in'):
+            return redirect(url_for('login'))
+        else:
+            device_id = request.form["device_id"]
+            vehicle_type = request.form["vehicle_type"]
+            plate = request.form["plate"]
+            last_date = request.form["last_date"]
+            new_device= [device_id, vehicle_type, plate, last_date]
+
+            vehicle = VehiclesHandler()
+            vehicle.register_device(new_device)
+            return redirect(url_for('PageRoutes.dashboard'))
+
+    else:
+        return render_template("register_device.html")
