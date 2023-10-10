@@ -15,8 +15,9 @@ class VehiclesHandler:
     COLUMN_CLASS: str = "class"  # Vehicle Type
     COLUMN_PLATE: str = "plate"  # Plate Number
     COLUMN_ROUTE: str = "route"  # Route Number
-    COLUMN_PMDATE: str = "pmdate"  # Predicted Maintenance Date
     COLUMN_LASTDATE: str = "last_date"  # Last Maintenance Date
+    COLUMN_PMDATE: str = "pmdate"  # Predicted Maintenance Date
+
 
     def __init__(self) -> None:
         self.db_handler = create_database_handler()
@@ -35,10 +36,10 @@ class VehiclesHandler:
         for vehicle in vehicles:
             vehicle_information = {
                 "id": vehicle[0],
-                "class": vehicle[1],
-                "plate": vehicle[2],
-                "route": vehicle[3],
-                "pmdate": vehicle[4],
+                "class": vehicle[2],
+                "plate": vehicle[3],
+                "route": vehicle[4],
+                "pmdate": vehicle[6],
                 # "notification":vehicle[5]
             }
             vehicles_information.append(vehicle_information)
