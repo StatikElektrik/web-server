@@ -105,7 +105,7 @@ def signup():
 
 
 @PageRoutes.route("/dashboard", methods=["GET"])
-#@login_required
+@login_required
 def dashboard():
     """It provides the dashboard page."""
     # Retrieve the vehicles from the database
@@ -150,7 +150,7 @@ def device_register():
         vehicle_type = request.form["vehicle_type"]
         plate = request.form["plate"]
         route = request.form["route"]
-        last_date = request.form["last_date"]
+
 
         vehicles_handler = VehiclesHandler()
         result = vehicles_handler.register_device(
