@@ -1,4 +1,5 @@
-{% extends 'partials/dashboard.html' %}
+{% extends 'dashboard/dashboard_base.html' %}
+
 
 {% block content %}
 
@@ -34,6 +35,17 @@
           <input class="input" type="text" required name="plate" placeholder="e.g. 34KLM35">
         </div>
       </div>
+
+      <div class="field">
+        <label class="label">Planend Route</label>
+        <div class="control has-icons-left">
+          <span class="icon is-small is-left">
+            <i class="mdi mdi-road-variant"></i>
+          </span>
+          <input class="input" type="text" required name="route" placeholder="e.g. 19S">
+        </div>
+      </div>
+
   
       <div class="field">
         <label class="label">Last Maintenance Date</label>

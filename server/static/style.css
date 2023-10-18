@@ -33,16 +33,19 @@
   margin:auto;
 }
 .subtitle{
-  font-family: 'Garet', sans-serif;
+  font-family: 'Verdana', sans-serif;
 }
-.title{
-  font-family: 'Garet', sans-serif;
+.dashboard-title{
+  font-family: 'Verdana', sans-serif;
 }
 .content{
-  font-family: 'Garet', sans-serif;
+  font-family: 'Verdana', sans-serif;
 }
 .card-content{
-  font-family: 'Garet', sans-serif;
+  font-family: 'Verdana', sans-serif;
+}
+.card-header{
+  font-family: 'Verdana', sans-serif;
 }
 
 .center {
@@ -57,11 +60,19 @@
 }
 
 .td{
-  font-family: 'Garet', sans-serif;
+  font-family: 'Verdana', sans-serif;
   text-align: center;
 }
 
 .th{
-  font-family: 'Garet', sans-serif;
+  font-family:'Verdana', sans-serif;
   text-align: center;
+}
+
+.sidebar{
+  margin-right: 250px
+}
+
+.has-background-sidebar{
+  background-color: #333
 }

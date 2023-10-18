@@ -110,7 +110,7 @@ def dashboard():
     """It provides the dashboard page."""
     # Retrieve the vehicles from the database
     if not session.get("logged_in"):
-        return redirect(url_for("login"))
+        return redirect(url_for("PageRoutes.login"))
     vehicles = VehiclesHandler().get_all_information()
     return render_template("dashboard_index.html", tools=vehicles)
 
@@ -120,6 +120,13 @@ def dashboard():
 def vehicle_details():
     """It provides the vehicle details page."""
     return render_template("vehicle_details.html")
+
+
+@PageRoutes.route("/profile", methods=["GET"])
+@login_required
+def profile():
+    """It provides the profile page."""
+    return render_template("dashboard/profile.html")
 
 
 @PageRoutes.route("/logout")
@@ -142,7 +149,8 @@ def device_register():
         device_id = request.form["device_id"]
         vehicle_type = request.form["vehicle_type"]
         plate = request.form["plate"]
-        last_date = request.form["last_date"]
+        route = request.form["route"]
+
 
         vehicles_handler = VehiclesHandler()
         result = vehicles_handler.register_device(
@@ -150,6 +158,7 @@ def device_register():
                 "device_id": device_id,
                 "class": vehicle_type,
                 "plate": plate,
+                "route": route,
                 "last_date": last_date,
             }
         )

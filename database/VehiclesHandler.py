@@ -15,8 +15,8 @@ class VehiclesHandler:
     COLUMN_CLASS: str = "class"  # Vehicle Type
     COLUMN_PLATE: str = "plate"  # Plate Number
     COLUMN_ROUTE: str = "route"  # Route Number
-    COLUMN_PMDATE: str = "pmdate"  # Predicted Maintenance Date
     COLUMN_LASTDATE: str = "last_date"  # Last Maintenance Date
+    COLUMN_PMDATE: str = "pmdate"  # Predicted Maintenance Date
 
     def __init__(self) -> None:
         self.db_handler = create_database_handler()
@@ -35,10 +35,10 @@ class VehiclesHandler:
         for vehicle in vehicles:
             vehicle_information = {
                 "id": vehicle[0],
-                "class": vehicle[1],
-                "plate": vehicle[2],
-                "route": vehicle[3],
-                "pmdate": vehicle[4],
+                "class": vehicle[2],
+                "plate": vehicle[3],
+                "route": vehicle[4],
+                "pmdate": vehicle[6],
                 # "notification":vehicle[5]
             }
             vehicles_information.append(vehicle_information)
@@ -54,11 +54,13 @@ class VehiclesHandler:
         """
         # Check if the dictionary contains the required keys.
         if not all(
-            key in device_info for key in ["device_id", "class", "plate", "last_date"]
+
+            key in device_info for key in ["device_id", "class", "plate", "route", "last_date"]
         ):
             raise ValueError(
                 "The device_info dictionary must contain the following keys: "
-                "device_id, class, plate, last_date"
+                "device_id, class, plate, route, last_date"
+
             )
 
         # Check if the device is registered.
@@ -71,6 +73,8 @@ class VehiclesHandler:
             self.COLUMN_DEVICEID: device_info["device_id"],
             self.COLUMN_CLASS: device_info["class"],
             self.COLUMN_PLATE: device_info["plate"],
+            self.COLUMN_ROUTE: device_info["route"],
+
             self.COLUMN_LASTDATE: device_info["last_date"],
         }
 
