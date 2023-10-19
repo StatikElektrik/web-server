@@ -207,10 +207,12 @@
               <td>{{vehicle.pmdate}}</td>
               <td class="is-actions-cell">
                 <div class="buttons is-right">
-                  <button class="button is-small is-light" type="button">
-                    <span class="icon"><i class="mdi mdi-eye"></i></span>
-                    <span> View details</span>
-                  </button>
+                    <button class="button is-small is-light" type="button" >
+                      <a class="sortable-header" href="{{url_for('PageRoutes.view_details')}}">
+                        <span class="icon"><i class="mdi mdi-eye"></i></span>
+                        <span> View details</span>
+                      </a>
+                    </button>
                 </div>
               </td>
             </tr>

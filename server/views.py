@@ -115,11 +115,11 @@ def dashboard():
     return render_template("dashboard_index.html", tools=vehicles)
 
 
-@PageRoutes.route("/vehicle_details", methods=["GET"])
+@PageRoutes.route("/view_details", methods=["GET"])
 @login_required
-def vehicle_details():
+def view_details():
     """It provides the vehicle details page."""
-    return render_template("vehicle_details.html")
+    return render_template("dashboard/view_details.html")
 
 
 @PageRoutes.route("/profile", methods=["GET"])
