@@ -138,8 +138,29 @@ def details():
     customer_id = query_arguments["cid"]
 
     return render_template("details.html",
-                           company_name="IETT",
-                           page_name="Vehicle Details")
+        company_name="IETT",
+        page_name="Vehicle Details",
+        image_location="metro_image.png",
+        vehicle_details={
+            "vehicle_id": vehicle_id,
+            "customer_id": customer_id,
+            "plate": "34KLM56",
+            "route": "M4.56",
+            "last_date": "2021-05-15",
+            "class": "Metro",
+            "status": "Active",
+            "last_location": "41.00527, 28.97696",
+        },
+        driver_details={
+            "profile_photo": "bus_driver.jpg",
+            "name": "John Doe",
+            "phone": "+90 532 123 45 67",
+        },
+        prediction_details={
+            "failure_date": "05/11/2023",
+            "failure_reason": "Piston corrosion on cyclinder 3",
+        },
+    )
 
 
 @PageRoutes.route("/profile", methods=["GET"])

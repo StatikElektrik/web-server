@@ -3,90 +3,104 @@
 {% block content %}
 
 <div class="columns">
+   <!-- CAR IMAGE -->
    <div class="column is-8">
       <div class="card">
          <div class="card-content">
             <div class="media">
                <div class="media-left">
-                  <figure class="image is-480x320">
-                     <img src="https://bulma.io/images/placeholders/480x320.png" alt="Image">
-                  </figure>
+                  <img src="/static/images/{{image_location}}" alt="Image" width="500" height="600">
                </div>
                <div class="media-content">
-                  <p class="title is-4">Recommended Prediction Date</p>
-                  <p class="subtitle is-6">{Prediction Date}</p>
+                  <table class="table">
+                     <tbody>
+                        <tr>
+                           <td><p class="is-6"><strong>Vehicle ID</strong></p></td>
+                           <td>{{vehicle_details.vehicle_id}}</td>
+                        </tr>
+                        <tr>
+                           <td><p class="is-6"><strong>Customer ID</strong></p></td>
+                           <td>{{vehicle_details.customer_id}}</td>
+                        </tr>
+                        <tr>
+                           <td><p class="is-6"><strong>Plate</strong></p></td>
+                           <td>{{vehicle_details.plate}}</td>
+                        </tr>
+                        <tr>
+                           <td><p class="is-6"><strong>Type</strong></p></td>
+                           <td>{{vehicle_details.class}}</td>
+                        </tr>
+                        <tr>
+                           <td><p class="is-6"><strong>Assigned Route</strong></p></td>
+                           <td>{{vehicle_details.route}}</td>
+                        </tr>
+                        <tr>
+                           <td><p class="is-6"><strong>Signal Status</strong></p></td>
+                           <td>{{vehicle_details.status}}</td>
+                        </tr>
+                        <tr>
+                           <td><p class="is-6"><strong>Last Location</strong></p></td>
+                           <td>{{vehicle_details.last_location}}</td>
+                        </tr>
+                     </tbody>
+                  </table>
                </div>
             </div>
          </div>
       </div>
    </div>
+
    <div class="column is-4">
-      <div class="card tile is-child">
-         <header class="card-header">
-            <p class="card-header-title">
-               <span class="icon"><i class="mdi mdi-account default"></i></span>
-               Driver
-            </p>
-         </header>
-         <div class="card-content">
-            <div class="media">
-               <div class="media-left">
-                  <figure class="image is-128x128">
-                     <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
-                  </figure>
-               </div>
-               <div class="media-content">
-                  <p class="subtitle is-7">Name Surname: </p>
-                  <p class="subtitle is-7">Age: </p>
-                  <p class="subtitle is-7">Licence: </p>
-                  <p class="subtitle is-7">Contact Number: </p>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
-<div>
-   <section class="is-medium has-background-white-ter mt-5 mb-5">
-      <div class="columns ml-1 mr-1">
-         <div class="column is-half ">
-            <div class="card">
-               <div class="card-header">
-                  <div class="tabs is-boxed">
-                     <ul>
-                        <li class="is-active" id="tab1">
-                           <a>
-                              <span class="icon is-small"><i class="mdi mdi-bus-alert" aria-hidden="true"></i></span>
-                              <span>Possible Failures</span>
-                           </a>
-                        </li>
-                        <li id="tab2">
-                           <a>
-                              <span class="icon is-small"><i class="mdi mdi-calendar-alert"
-                                    aria-hidden="true"></i></span>
-                              <span>Historic Failures</span>
-                           </a>
-                        </li>
-                     </ul>
+
+      <!-- DRIVER DETAILS -->
+      <div class="columns">
+         <div class="column">
+            <div class="card tile is-child">
+               <header class="card-header">
+                  <p class="card-header-title">
+                     <span class="icon"><i class="mdi mdi-account default"></i></span>
+                     Driver
+                  </p>
+               </header>
+               <div class="card-content">
+                  <div class="media">
+                     <div class="media-left">
+                        <figure class="image is-64x64">
+                           <img class="is-rounded" src="/static/images/{{driver_details.profile_photo}}" width="64", height="64">
+                        </figure>
+                     </div>
+                     <div class="media-content">
+                        <p class="is-6">{{driver_details.name}}<br>{{driver_details.phone}}</p>
+                     </div>
                   </div>
                </div>
-               <div class="card-content" id="tab-content-1">
-                  <!-- Content for Tab 1 -->
-                  <p>This is the content of Tab 1.</p>
-               </div>
             </div>
          </div>
-         <div class="column is-half">
-            <figure class="image is-640x480">
-               <img src="https://bulma.io/images/placeholders/640x480.png">
-            </figure>
+      </div>
+      
+      <!-- VEHICLE DETAILS -->
+      <div class="columns">
+         <div class="column">
+            <div class="card tile is-child">
+               <div class="card-content">
+                  <nav class="level">
+                     <div class="level-item has-text-centered">
+                       <div>
+                           <p class="heading">Predicted Failure Date & Reason</p>
+                           <p class="title">{{prediction_details.failure_date}}</p>
+                           <p class="heading"><strong>{{prediction_details.failure_reason}}</strong></p>
+                       </div>
+                     </div>
+                  </nav>
+               </div>
+               <footer class="card-footer">
+                  <a href="#" class="card-footer-item">Plan Maintance</a>
+                </footer>
+            </div>
          </div>
       </div>
-
-   </section>
+   </div>
 </div>
-
-
 
 
 {% endblock %}
