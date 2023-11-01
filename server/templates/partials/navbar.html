@@ -24,7 +24,7 @@
                         {% if logged_in == True %}
                             <a class="button is-outlined is-primary" href="{{ url_for('PageRoutes.dashboard')}}"><strong>Dashboard</strong></a>
                         {% else %}
-                            <a class="button is-outlined is-primary" href="{{ url_for('PageRoutes.dashboard')}}"><strong>Login/Signup</strong></a>
+                            <a class="button is-outlined is-primary" href="{{ url_for('PageRoutes.login')}}"><strong>Login/Signup</strong></a>
                         {% endif %}
                     </div>
                 </div>
