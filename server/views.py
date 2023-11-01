@@ -111,11 +111,15 @@ def dashboard():
     if not session.get("logged_in"):
         return redirect(url_for("PageRoutes.login"))
     vehicles = VehiclesHandler().get_all_information()
-    return render_template("dashboard_index.html", 
+    return render_template("dashboard_index.html",
                            datatable=vehicles,
                            company_name="IETT",
                            page_name="Dashboard",
-                           summary_information={"total": 86, "planned": 15, "required": 19}
+                           summary_information={"total": 86, "planned": 15, "required": 19},
+                           suggestions=[
+                               "Consider changing M4.56's route with M4.57's route.",
+                                "34KLM56 is not in the route. Please check it."
+                            ],
                            )
 
 

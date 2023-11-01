@@ -3,12 +3,12 @@
 {% block content %}
 
 <script>
-  function myFunction() {
+  function sortTable() {
     // Declare variables
     var input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
-    table = document.getElementById("myTable");
+    table = document.getElementById("vehicleDetailsTable");
     tr = table.getElementsByTagName("tr");
 
     // Loop through all table rows, and hide those who don't match the search query
@@ -26,7 +26,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', function () {
-    const table = document.getElementById('myTable');
+    const table = document.getElementById('vehicleDetailsTable');
     const tbody = table.querySelector('tbody');
     const sortDate = document.getElementById('sortDate');
     let ascending = true;
@@ -54,17 +54,6 @@
     }
 
     sortDate.addEventListener('click', sortTable);
-  });
-
-  $(document).ready(function () {
-    $(".delete-btn").click(function () {
-      var itemId = $(this).data("id");
-      if (confirm("Are you sure you want to delete this item?")) {
-        // If the user confirms, you can proceed with the deletion.
-        // You can make an AJAX request to your Flask server here to delete the item.
-        // Example: $.post("/delete_item", {id: itemId}, function(response) {...});
-      }
-    });
   });
 
 </script>
@@ -155,13 +144,8 @@
       <div class="card-content">
         <div class="field is-grouped">
           <p class="control is-expanded">
-            <input class="input" type="text" id="myInput" onkeyup="myFunction()"
+            <input class="input" type="text" id="myInput" onkeyup="sortTable()"
               placeholder="Find a vehicle from licence plate...">
-          </p>
-          <p class="control">
-            <a class="button is-light">
-              Search
-            </a>
           </p>
           <p class="control">
             <a class="button is-primary" href="{{ url_for('PageRoutes.device_register') }}">
@@ -170,12 +154,12 @@
           </p>
         </div>
 
-        <table class="table is-striped is-hoverable " id="myTable">
+        <table class="table is-striped is-hoverable is-fullwidth" id="vehicleDetailsTable">
           <thead>
             <tr>
               <th style="text-align: center;"><abbr title="Vehicle id">id</abbr></th>
-              <th style="text-align: center;">Class</th>
-              <th style="text-align: center;">License Plate</th>
+              <th style="text-align: center;">Type</th>
+              <th style="text-align: center;">Plate</th>
               <th style="text-align: center;">Route</th>
               <th style="text-align: center;">
                 <a id="sortDate" class="sortable-header">
@@ -187,6 +171,7 @@
                   </span>
                 </a>
               </th>
+              <th style="text-align: center;"></th>
             </tr>
           </thead>
           <tbody>
@@ -202,7 +187,7 @@
                   <button class="button is-small is-light" type="button">
                     <a class="sortable-header" href="{{url_for('PageRoutes.view_details')}}">
                       <span class="icon"><i class="mdi mdi-eye"></i></span>
-                      <span> View details</span>
+                      <span> Details</span>
                     </a>
                   </button>
                 </div>
@@ -224,13 +209,11 @@
         </p>
       </div>
       <div class="card-content">
-        <div class="notification">
-          <button class="delete"></button>
-          Lorem ipsum dolor sit amet, consectetur
-          adipiscing elit lorem ipsum dolor. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec
-          nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis
-            venenatis</a> efficitur.
-        </div>
+        {% for suggestion in suggestions %}
+          <div class="notification m-1">
+            {{suggestion}}
+          </div>
+        {% endfor %}
       </div>
     </div>
     <div class="card mt-5">
