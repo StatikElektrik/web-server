@@ -125,9 +125,9 @@ def dashboard():
                            )
 
 
-@PageRoutes.route("/view_details", methods=["GET"])
+@PageRoutes.route("/details", methods=["GET"])
 @login_required
-def view_details():
+def details():
     """It provides the vehicle details page."""
     query_arguments = request.args.to_dict()
     if not query_arguments:
@@ -137,7 +137,7 @@ def view_details():
     vehicle_id = query_arguments["vid"]
     customer_id = query_arguments["cid"]
 
-    return render_template("view_details.html",
+    return render_template("details.html",
                            company_name="IETT",
                            page_name="Vehicle Details")
 
