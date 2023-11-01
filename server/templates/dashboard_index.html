@@ -68,14 +68,6 @@
   });
 
 </script>
-<div>
-  <section class="section title has-background-white-ter mt-5 mb-5">
-    <div class="title">
-      Company / Dashboard
-
-    </div>
-  </section>
-</div>
 
 <div class="columns">
   <div class="column is-8">
@@ -90,7 +82,7 @@
                     Total
                   </h3>
                   <h1 class="title">
-                    82
+                    {{summary_information['total']}}
                   </h1>
                 </div>
               </div>
@@ -110,10 +102,10 @@
               <div class="level-item">
                 <div class="is-widget-label">
                   <h3 class="subtitle is-spaced">
-                    Require
+                    Required
                   </h3>
                   <h1 class="title">
-                    15
+                    {{summary_information['required']}}
                   </h1>
                 </div>
               </div>
@@ -134,10 +126,10 @@
               <div class="level-item">
                 <div class="is-widget-label">
                   <h3 class="subtitle is-spaced">
-                    Planned
+                    Planned 
                   </h3>
                   <h1 class="title">
-                    3
+                    {{summary_information['planned']}}
                   </h1>
                 </div>
               </div>
@@ -173,7 +165,7 @@
           </p>
           <p class="control">
             <a class="button is-primary" href="{{ url_for('PageRoutes.device_register') }}">
-              NEW DEVICE
+              Register New Vehicle
             </a>
           </p>
         </div>
@@ -198,7 +190,7 @@
             </tr>
           </thead>
           <tbody>
-            {% for vehicle in tools %}
+            {% for vehicle in datatable %}
             <tr>
               <th>{{vehicle.id}}</th>
               <td>{{vehicle.class}}</td>
@@ -207,12 +199,12 @@
               <td>{{vehicle.pmdate}}</td>
               <td class="is-actions-cell">
                 <div class="buttons is-right">
-                    <button class="button is-small is-light" type="button" >
-                      <a class="sortable-header" href="{{url_for('PageRoutes.view_details')}}">
-                        <span class="icon"><i class="mdi mdi-eye"></i></span>
-                        <span> View details</span>
-                      </a>
-                    </button>
+                  <button class="button is-small is-light" type="button">
+                    <a class="sortable-header" href="{{url_for('PageRoutes.view_details')}}">
+                      <span class="icon"><i class="mdi mdi-eye"></i></span>
+                      <span> View details</span>
+                    </a>
+                  </button>
                 </div>
               </td>
             </tr>

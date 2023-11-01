@@ -15,6 +15,11 @@
 <body>
     {% include 'dashboard/dashboard_navbar.html' %}
     <div class="container mt-5 mb-5">
+        <div>
+            <section class="section title has-background-white-ter mt-5 mb-5">
+                <div class="title">{{company_name}} / {{page_name}}</div>
+            </section>
+          </div>
         {% block content %} {% endblock %}
     </div>
 

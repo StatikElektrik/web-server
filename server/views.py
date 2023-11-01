@@ -111,21 +111,26 @@ def dashboard():
     if not session.get("logged_in"):
         return redirect(url_for("PageRoutes.login"))
     vehicles = VehiclesHandler().get_all_information()
-    return render_template("dashboard_index.html", tools=vehicles)
+    return render_template("dashboard_index.html", 
+                           datatable=vehicles,
+                           company_name="IETT",
+                           page_name="Dashboard",
+                           summary_information={"total": 86, "planned": 15, "required": 19}
+                           )
 
 
 @PageRoutes.route("/view_details", methods=["GET"])
 @login_required
 def view_details():
     """It provides the vehicle details page."""
-    return render_template("dashboard/view_details.html")
+    return render_template("dashboard/view_details.html", company_name="IETT", page_name="Vehicle Details")
 
 
 @PageRoutes.route("/profile", methods=["GET"])
 @login_required
 def profile():
     """It provides the profile page."""
-    return render_template("dashboard/profile.html")
+    return render_template("dashboard/profile.html", company_name="IETT", page_name="Profile")
 
 
 @PageRoutes.route("/logout")
@@ -173,4 +178,4 @@ def device_register():
             return redirect(url_for("PageRoutes.dashboard"))
 
     # Render the register page if request made with GET.
-    return render_template("register_device.html")
+    return render_template("register_device.html", company_name="IETT", page_name="Register New Device")
