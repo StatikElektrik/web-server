@@ -15,7 +15,6 @@ PageRoutes = Blueprint("PageRoutes", __name__)
 
 def login_required(route_function):
     """It is a decorator that checks if the user is logged in."""
-
     @wraps(route_function)
     def decorated_function(*args, **kwargs):
         if not session.get("logged_in"):
@@ -29,7 +28,7 @@ def login_required(route_function):
 @PageRoutes.route("/", methods=["GET"])
 def index():
     """It provides the index page."""
-    return render_template("index.html")
+    return render_template("index.html", logged_in=session.get("logged_in"))
 
 
 @PageRoutes.route("/about-us", methods=["GET"])
@@ -37,13 +36,13 @@ def about_us():
     """It provides the about us page."""
     # Retrieve the project managers from the database.
     project_managers = ProjectManagersHandler().get_all_information()
-    return render_template("about_us.html", members=project_managers)
+    return render_template("about_us.html", members=project_managers, logged_in=session.get("logged_in"))
 
 
 @PageRoutes.route("/project_details", methods=["GET"])
 def project_details():
     """It provides the project details page."""
-    return render_template("project_details.html")
+    return render_template("project_details.html", logged_in=session.get("logged_in"))
 
 
 @PageRoutes.route("/login", methods=["GET", "POST"])
