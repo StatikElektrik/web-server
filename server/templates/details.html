@@ -102,4 +102,94 @@
    </div>
 </div>
 
+<div class="columns">
+   <div class="column">
+      <div class="card tile is-child">
+         <div class="card-content">
+            <div class="columns">
+               <div class="column">
+                  <canvas id="predictionGraphs" height="300"></canvas>
+               </div>
+               <div class="column">
+                  <canvas id="predictionGraphs2" height="300"></canvas>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+   const xValues = [100,200,300,400,500,600,700,800,900,1000];
+
+   new Chart("predictionGraphs2", {
+      type: 'polarArea',
+      data: {
+         labels: [
+            "Pressure Reduction in the Intake Manifold",
+            "Compression Ratio Reduction in the Cylinders", 
+            "Reduction in the Amount of Fuel Injected into the Cylinders"
+         ],
+         datasets: [{
+            label: 'My First Dataset',
+            data: [11, 16, 7,],
+            backgroundColor: [
+               'rgb(255, 99, 132)',
+               'rgb(75, 192, 192)',
+               'rgb(255, 205, 86)',
+            ],
+            hoverOffset: 4
+         }]
+      },
+      options: {
+         responsive: true,
+         plugins: {
+            legend: {
+               position: 'bottom',
+            },
+         }
+      },
+   });
+
+   new Chart("predictionGraphs", {
+      type: "line",
+      data: {
+         labels: xValues,
+         datasets: [{
+            label: "Pressure Reduction in the Intake Manifold",
+            data: [860,1140,1060,1060,1070,1110,1330,2210,7830,2478],
+            borderColor: 'rgb(255, 99, 132)',
+            fill: false,
+            pointStyle: 'circle',
+            pointRadius: 5,
+            pointHoverRadius: 10,
+         },{
+            label: "Compression Ratio Reduction in the Cylinders",
+            data: [1600,1700,1700,1900,2000,2700,4000,5000,6000,7000],
+            borderColor: 'rgb(75, 192, 192)',
+            fill: false,
+            pointStyle: 'circle',
+            pointRadius: 5,
+            pointHoverRadius: 10,
+         },{
+            label: "Reduction in the Amount of Fuel Injected into the Cylinders",
+            data: [300,700,2000,5000,6000,4000,2000,1000,200,100],
+            borderColor: 'rgb(255, 205, 86)',
+            fill: false,
+            pointStyle: 'circle',
+            pointRadius: 5,
+            pointHoverRadius: 10,
+         }]
+      },
+      options: {
+         plugins: {
+            legend: {
+            position: 'bottom',
+            },
+         }
+
+      }
+   });
+ </script>
 {% endblock %}
