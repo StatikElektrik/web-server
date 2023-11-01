@@ -1,7 +1,7 @@
 """
 This module contains the routes for serving the HTML files.
 """
-
+from datetime import datetime
 from functools import wraps
 from flask import Blueprint
 from flask import render_template, request, redirect, url_for, flash, session
@@ -127,14 +127,18 @@ def dashboard():
 @login_required
 def view_details():
     """It provides the vehicle details page."""
-    return render_template("dashboard/view_details.html", company_name="IETT", page_name="Vehicle Details")
+    return render_template("dashboard/view_details.html",
+                           company_name="IETT",
+                           page_name="Vehicle Details")
 
 
 @PageRoutes.route("/profile", methods=["GET"])
 @login_required
 def profile():
     """It provides the profile page."""
-    return render_template("dashboard/profile.html", company_name="IETT", page_name="Profile")
+    return render_template("dashboard/profile.html",
+                           company_name="IETT",
+                           page_name="Profile")
 
 
 @PageRoutes.route("/logout")
@@ -158,7 +162,8 @@ def device_register():
         vehicle_type = request.form["vehicle_type"]
         plate = request.form["plate"]
         route = request.form["route"]
-
+        last_date = request.form["last_date"]
+        last_date = datetime.strptime(last_date, "%Y-%m-%d")
 
         vehicles_handler = VehiclesHandler()
         result = vehicles_handler.register_device(
@@ -182,4 +187,15 @@ def device_register():
             return redirect(url_for("PageRoutes.dashboard"))
 
     # Render the register page if request made with GET.
-    return render_template("register_device.html", company_name="IETT", page_name="Register New Device")
+    return render_template("register_device.html",
+                           company_name="IETT",
+                           page_name="Register New Device",
+                           vehicle_types=[
+                            {"id": 0, "name": "Bus"},
+                            {"id": 1, "name": "Tram"},
+                            {"id": 2, "name": "Metrobus"},
+                            {"id": 3, "name": "Metro"},
+                            {"id": 4, "name": "Ferry"},
+                            {"id": 5, "name": "Marmaray"},
+                            {"id": 7, "name": "Funicular"},
+                           ])

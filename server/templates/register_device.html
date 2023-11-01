@@ -1,8 +1,5 @@
 {% extends 'dashboard/dashboard_base.html' %}
-
-
 {% block content %}
-
 <div class="container">
   
     <form class="box custom-box" action="/devices/register" method="post">
@@ -10,19 +7,25 @@
         <label class="label">Device ID</label>
         <div class="control has-icons-left">
           <span class="icon is-small is-left">
-            <i class="mdi mdi-router-network-wireless"></i>
+            <i class="mdi mdi-router-network"></i>
           </span>
           <input class="input" required type="text" name="device_id" placeholder="e.g. 15849876512">
         </div>
       </div>
   
-      <div class="field">
+      <div class="field is-full-width">
         <label class="label">Vehicle Type</label>
         <div class="control has-icons-left">
           <span class="icon is-small is-left">
-            <i class="mdi mdi-train-bus"></i>
+            <i class="mdi mdi-bus"></i>
           </span>
-          <input class="input" required type="text" name="vehicle_type" placeholder="e.g. Bus">
+          <div class="select">
+            <select>
+              {% for vehicle_type in vehicle_types %}
+                <option value="{{vehicle_type.id}}">{{vehicle_type.name}}</option>
+              {% endfor %}
+            </select>
+          </div>
         </div>
       </div>
   
