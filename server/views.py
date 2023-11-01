@@ -113,6 +113,7 @@ def dashboard():
     vehicles = VehiclesHandler().get_all_information()
     return render_template("dashboard.html",
                            datatable=vehicles,
+                           customer_id="01",
                            company_name="IETT",
                            page_name="Dashboard",
                            summary_information={"total": 86, "planned": 15, "required": 19},

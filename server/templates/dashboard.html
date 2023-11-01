@@ -177,7 +177,7 @@
           <tbody>
             {% for vehicle in datatable %}
             <tr>
-              <th>{{vehicle.id}}</th>
+              <th>{{vehicle.vid}}</th>
               <td>{{vehicle.class}}</td>
               <td>{{vehicle.plate}}</td>
               <td>{{vehicle.route}}</td>
@@ -185,7 +185,7 @@
               <td class="is-actions-cell">
                 <div class="buttons is-right">
                   <button class="button is-small is-light" type="button">
-                    <a class="sortable-header" href="{{url_for('PageRoutes.view_details')}}">
+                    <a class="sortable-header" href="{{url_for('PageRoutes.view_details')}}?vid={{vehicle.vid}}&cid={{customer_id}}">
                       <span class="icon"><i class="mdi mdi-eye"></i></span>
                       <span> Details</span>
                     </a>
