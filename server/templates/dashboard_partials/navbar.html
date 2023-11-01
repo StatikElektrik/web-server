@@ -16,15 +16,15 @@
       <a class="navbar-item" href="{{ url_for('PageRoutes.project_details')}}">Project Details</a>
     </div>
 
-    <div class="navbar-end">
+    <div class="navbar-end pr-5">
       <div class="navbar-end">
         <div class="navbar-item has-dropdown has-dropdown-with-icons has-divider has-user-avatar is-hoverable">
           <a class="navbar-link is-arrowless">
-            <div class="is-user-name"><span>{user_name}</span></div>
+            <div class="is-user-name"><span>{{user_name}}</span></div>
             <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
           </a>
           <div class="navbar-dropdown">
-            <a href="/profile" class="navbar-item">
+            <a class="navbar-item">
               <span class="icon"><i class="mdi mdi-account"></i></span>
               <span>My Profile</span>
             </a>

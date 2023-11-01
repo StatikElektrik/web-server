@@ -1,4 +1,4 @@
-{% extends 'dashboard/dashboard_base.html' %}
+{% extends 'dashboard_partials/base.html' %}
 
 {% block content %}
 
@@ -148,7 +148,7 @@
               placeholder="Find a vehicle from licence plate...">
           </p>
           <p class="control">
-            <a class="button is-primary" href="{{ url_for('PageRoutes.device_register') }}">
+            <a class="button is-dark is-outlined" href="{{ url_for('PageRoutes.device_register') }}">
               Register New Vehicle
             </a>
           </p>
@@ -157,7 +157,7 @@
         <table class="table is-striped is-hoverable is-fullwidth" id="vehicleDetailsTable">
           <thead>
             <tr>
-              <th style="text-align: center;"><abbr title="Vehicle id">id</abbr></th>
+              <th style="text-align: center;">VID</th>
               <th style="text-align: center;">Type</th>
               <th style="text-align: center;">Plate</th>
               <th style="text-align: center;">Route</th>

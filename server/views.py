@@ -111,7 +111,7 @@ def dashboard():
     if not session.get("logged_in"):
         return redirect(url_for("PageRoutes.login"))
     vehicles = VehiclesHandler().get_all_information()
-    return render_template("dashboard_index.html",
+    return render_template("dashboard.html",
                            datatable=vehicles,
                            company_name="IETT",
                            page_name="Dashboard",
@@ -120,6 +120,7 @@ def dashboard():
                                "Consider changing M4.56's route with M4.57's route.",
                                 "34KLM56 is not in the route. Please check it."
                             ],
+                            user_name="John Doe"
                            )
 
 
@@ -127,7 +128,7 @@ def dashboard():
 @login_required
 def view_details():
     """It provides the vehicle details page."""
-    return render_template("dashboard/view_details.html",
+    return render_template("view_details.html",
                            company_name="IETT",
                            page_name="Vehicle Details")
 
@@ -136,7 +137,7 @@ def view_details():
 @login_required
 def profile():
     """It provides the profile page."""
-    return render_template("dashboard/profile.html",
+    return render_template("profile.html",
                            company_name="IETT",
                            page_name="Profile")
 
