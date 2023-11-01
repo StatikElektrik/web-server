@@ -18,7 +18,7 @@ def login_required(route_function):
     @wraps(route_function)
     def decorated_function(*args, **kwargs):
         if not session.get("logged_in"):
-            flash("Please log in to access this page.")
+            flash({"text": "Please log in to access this page.", "msg_type": "warning"})
             return redirect(url_for("PageRoutes.login"))
         return route_function(*args, **kwargs)
 
@@ -57,14 +57,14 @@ def login():
         if not user_exist or not check_password_hash(
             user.get_password_hash(email), password
         ):
-            flash("Please check your login details and try again.")
+            flash({"text": "Please check your login details and try again.", "msg_type": "warning"})
             return redirect(url_for("PageRoutes.login"))
         else:
             session["logged_in"] = True
             return redirect(url_for("PageRoutes.dashboard"))
 
     # If request made with GET, render the login page.
-    return render_template("auth/login.html")
+    return render_template("login.html")
 
 
 @PageRoutes.route("/signup", methods=["GET", "POST"])
@@ -88,19 +88,19 @@ def signup():
         )
 
         if result == RegistrationStates.NOT_REGISTERED:
-            flash("Something went wrong. Please try again.")
+            flash({"text": "Something went wrong. Please try again.", "msg_type": "warning"})
             return redirect(url_for("PageRoutes.signup"))
         elif result == RegistrationStates.ALREADY_REGISTERED:
-            flash("Email address already exists")
+            flash({"text": "Email address already exists", "msg_type": "warning"})
             return redirect(url_for("PageRoutes.signup"))
         elif result == RegistrationStates.SUCCESS:
-            flash("User registered successfully!")
+            flash({"text": "User registered successfully!", "msg_type": "primary"})
             return redirect(url_for("PageRoutes.login"))
         else:
-            flash("Something went wrong. Please try again.")
+            flash({"text": "Something went wrong. Please try again.", "msg_type": "warning"})
             return redirect(url_for("PageRoutes.signup"))
     else:
-        return render_template("auth/signup.html")
+        return render_template("signup.html")
 
 
 @PageRoutes.route("/dashboard", methods=["GET"])
@@ -128,6 +128,14 @@ def dashboard():
 @login_required
 def view_details():
     """It provides the vehicle details page."""
+    query_arguments = request.args.to_dict()
+    if not query_arguments:
+        flash({"text": "Please select a vehicle to view details.", "msg_type": "warning"})
+        return redirect(url_for("PageRoutes.dashboard"))
+
+    vehicle_id = query_arguments["vid"]
+    customer_id = query_arguments["cid"]
+
     return render_template("view_details.html",
                            company_name="IETT",
                            page_name="Vehicle Details")
@@ -178,13 +186,13 @@ def device_register():
         )
 
         if result == RegistrationStates.NOT_REGISTERED:
-            flash("Something went wrong. Please try again.")
+            flash({"text": "Something went wrong. Please try again.", "msg_type": "warning"})
             return redirect(url_for("PageRoutes.device_register"))
         elif result == RegistrationStates.ALREADY_REGISTERED:
-            flash("Device already registered.")
+            flash({"text": "Device already registered.", "msg_type": "warning"})
             return redirect(url_for("PageRoutes.device_register"))
         elif result == RegistrationStates.SUCCESS:
-            flash("Device registered successfully!")
+            flash({"text": "Device registered successfully!", "msg_type": "primary"})
             return redirect(url_for("PageRoutes.dashboard"))
 
     # Render the register page if request made with GET.

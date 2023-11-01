@@ -14,7 +14,16 @@
 
 <body>
     {% include 'dashboard_partials/navbar.html' %}
+
     <div class="container mt-5 mb-5">
+        {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+            <div class="notification is-{{ message['msg_type']}} is-light">
+                <button class="delete"></button>
+                {{ message['text'] }}
+            </div>
+        {% endfor %}
+    {% endwith %}
         <div>
             <section class="section title has-background-white-ter mt-5 mb-5">
                 <div class="title">{{company_name}} / {{page_name}}</div>
