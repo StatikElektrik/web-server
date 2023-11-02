@@ -163,6 +163,7 @@ def details():
             "failure_date": "05/11/2023",
             "failure_reason": "Piston corrosion on cyclinder 3",
         },
+        user_name="John Doe"
         back_link="/dashboard",
     )
 
@@ -225,6 +226,7 @@ def device_register():
     return render_template("register_device.html",
                            company_name="IETT",
                            page_name="Register New Device",
+                           user_name="John Doe",
                            vehicle_types=[
                             {"id": 0, "name": "Bus"},
                             {"id": 1, "name": "Tram"},
