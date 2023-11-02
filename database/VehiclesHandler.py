@@ -34,7 +34,7 @@ class VehiclesHandler:
         vehicles_information = []
         for vehicle in vehicles:
             vehicle_information = {
-                "vid": vehicle[0],
+                "vid": vehicle[1],
                 "class": vehicle[2],
                 "plate": vehicle[3],
                 "route": vehicle[4],
