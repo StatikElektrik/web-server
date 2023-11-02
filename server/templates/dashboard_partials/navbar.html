@@ -1,0 +1,49 @@
+<nav id="navbar-main" class="navbar p-3 is-dark has-shadow">
+  <div id="navigationBar" class="navbar-menu fadeIn animated faster">
+    <div class="navbar-start">
+      <div class="navbar-brand">
+        <a class="navbar-item " href="{{ url_for('PageRoutes.index')}}">
+            <img src="/static/images/ptai_logo_beyaz.png" width="75" height="40">
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navigationBar">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+      </div>
+      <a class="navbar-item" href="{{ url_for('PageRoutes.about_us')}}">About Us</a>
+      <a class="navbar-item" href="{{ url_for('PageRoutes.project_details')}}">Project Details</a>
+    </div>
+
+    <div class="navbar-end pr-5">
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown has-dropdown-with-icons has-divider has-user-avatar is-hoverable">
+          <a class="navbar-link is-arrowless">
+            <div class="is-user-name"><span>{{user_name}}</span></div>
+            <span class="icon"><i class="mdi mdi-chevron-down"></i></span>
+          </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item">
+              <span class="icon"><i class="mdi mdi-account"></i></span>
+              <span>My Profile</span>
+            </a>
+            <a class="navbar-item">
+              <span class="icon"><i class="mdi mdi-settings"></i></span>
+              <span>Settings</span>
+            </a>
+            <a class="navbar-item">
+              <span class="icon"><i class="mdi mdi-email"></i></span>
+              <span>Messages</span>
+            </a>
+            <hr class="navbar-divider">
+            <a class="navbar-item" href="{{ url_for('PageRoutes.logout')}}">
+              <span class="icon"><i class="mdi mdi-logout"></i></span>
+              <span>Log Out</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,238 @@
+{% extends 'dashboard_partials/base.html' %}
+
+{% block content %}
+
+<script>
+  function sortTable() {
+    // Declare variables
+    var input, filter, table, tr, td, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("vehicleDetailsTable");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[1];
+      if (td) {
+        txtValue = td.textContent || td.innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const table = document.getElementById('vehicleDetailsTable');
+    const tbody = table.querySelector('tbody');
+    const sortDate = document.getElementById('sortDate');
+    let ascending = true;
+
+    function sortTable() {
+      const rows = Array.from(tbody.querySelectorAll('tr'));
+
+      rows.sort((a, b) => {
+        const dateA = new Date(a.querySelector('td:nth-child(5)').textContent);
+        const dateB = new Date(b.querySelector('td:nth-child(5)').textContent);
+
+        if (ascending) {
+          return dateA - dateB;
+        } else {
+          return dateB - dateA;
+        }
+      });
+
+      tbody.innerHTML = '';
+      for (const row of rows) {
+        tbody.appendChild(row);
+      }
+
+      ascending = !ascending;
+    }
+
+    sortDate.addEventListener('click', sortTable);
+  });
+
+</script>
+
+<div class="columns">
+  <div class="column is-9">
+    <div class="columns">
+      <div class="column is-one-third">
+        <div class="card tile is-child">
+          <div class="card-content">
+            <div class="level is-mobile">
+              <div class="level-item">
+                <div class="is-widget-label">
+                  <h3 class="subtitle is-spaced">
+                    Total
+                  </h3>
+                  <h1 class="title">
+                    {{summary_information['total']}}
+                  </h1>
+                </div>
+              </div>
+              <div class="level-item has-widget-icon">
+                <div class="is-widget-icon"><span class="icon has-text-primary is-large"><i
+                      class="mdi mdi-train-car mdi-48px"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column is-one-third">
+        <div class="card tile is-child">
+          <div class="card-content">
+            <div class="level is-mobile">
+              <div class="level-item">
+                <div class="is-widget-label">
+                  <h3 class="subtitle is-spaced">
+                    Required
+                  </h3>
+                  <h1 class="title">
+                    {{summary_information['required']}}
+                  </h1>
+                </div>
+              </div>
+              <div class="level-item has-widget-icon">
+                <div class="is-widget-icon"><span class="icon has-text-warning is-large"><i
+                      class="mdi mdi-information-box mdi-48px"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="column is-one-third">
+        <div class="card tile is-child">
+          <div class="card-content">
+            <div class="level is-mobile">
+              <div class="level-item">
+                <div class="is-widget-label">
+                  <h3 class="subtitle is-spaced">
+                    Planned 
+                  </h3>
+                  <h1 class="title">
+                    {{summary_information['planned']}}
+                  </h1>
+                </div>
+              </div>
+              <div class="level-item has-widget-icon">
+                <div class="is-widget-icon"><span class="icon has-text-danger is-large"><i
+                      class="mdi mdi-train-car-flatbed-car mdi-48px"></i></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card has-table">
+
+      <header class="card-header has-background-white-ter">
+        <p class="card-header-title">
+          <span class="icon"><i class="mdi mdi-account-multiple"></i></span>
+          Vehicles
+        </p>
+      </header>
+
+      <div class="card-content">
+        <div class="field is-grouped">
+          <p class="control is-expanded">
+            <input class="input" type="text" id="myInput" onkeyup="sortTable()"
+              placeholder="Find a vehicle from licence plate...">
+          </p>
+          <p class="control">
+            <a class="button is-dark is-outlined" href="{{ url_for('PageRoutes.device_register') }}">
+              Register New Vehicle
+            </a>
+          </p>
+        </div>
+
+        <table class="table is-striped is-hoverable is-fullwidth" id="vehicleDetailsTable">
+          <thead>
+            <tr>
+              <th style="text-align: center;">VID</th>
+              <th style="text-align: center;">Type</th>
+              <th style="text-align: center;">Plate</th>
+              <th style="text-align: center;">Route</th>
+              <th style="text-align: center;">
+                <a id="sortDate" class="sortable-header">
+                  <span class="icon-text ">
+                    <span>Predicted Date</span>
+                    <span class="icon">
+                      <i class="mdi mdi-sort-calendar-descending mdi mdi-24px"></i>
+                    </span>
+                  </span>
+                </a>
+              </th>
+              <th style="text-align: center;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for vehicle in datatable %}
+            <tr>
+              <th>{{vehicle.vid}}</th>
+              <td>{{vehicle.class}}</td>
+              <td>{{vehicle.plate}}</td>
+              <td>{{vehicle.route}}</td>
+              <td>{{vehicle.pmdate}}</td>
+              <td class="is-actions-cell">
+                <div class="buttons is-right">
+                  <button class="button is-small is-light" type="button">
+                    <a class="sortable-header" href="{{url_for('PageRoutes.details')}}?vid={{vehicle.vid}}&cid={{customer_id}}">
+                      <span class="icon"><i class="mdi mdi-eye"></i></span>
+                      <span> Details</span>
+                    </a>
+                  </button>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="column is-3">
+    <div class="card">
+      <div class="card-header has-background-white-ter">
+        <p class="card-header-title">
+          Suggestions
+        </p>
+      </div>
+      <div class="card-content">
+        {% for suggestion in suggestions %}
+          <div class="notification m-1">
+            {{suggestion}}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="card mt-5">
+      <header class="card-header has-background-white-ter">
+        <p class="card-header-title">
+          Help Desk
+        </p>
+      </header>
+      <div class="card-content ">
+        <div class="column ">
+          <a class="button level is-info has-background-grey-dark mb-3 " href="#">
+            <span> <i class="mdi mdi-phone"></i></span>
+            Contact with driver </a>
+          <a class="button level is-info has-background-grey-dark " href="#">
+            <span> <i class="mdi mdi-message-text"></i></span>
+            Contact with PTAI </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {% endblock %}

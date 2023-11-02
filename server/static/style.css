@@ -1,0 +1,78 @@
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css";
+@import "https://cdn.jsdelivr.net/npm/@mdi/font@7.2.96/css/materialdesignicons.min.css";
+@import "https://fonts.cdnfonts.com/css/garet";
+
+.details_container {
+    display: grid;
+    align-items: center; 
+    grid-template-columns: 1fr 1fr;
+    column-gap: 5px;
+    margin-bottom: 100px; /* Add space between containers */
+    border: 1px solid #d4d10d;
+   /* justify-content: center;*/
+   
+  }
+  details_img {
+    max-width: 70%;
+    max-height:70%;
+  }
+  
+  .details_text {
+    font-size: 30px;
+    padding-left: 20px;
+    font-family: 'Garet', sans-serif;
+  }
+
+.custom-box{
+  width: 50% ;
+  margin: 0 auto; /* Yatayda ortala */;
+}
+
+.tile {
+  align-items: center;
+  margin:auto;
+}
+.subtitle{
+  font-family: 'Verdana', sans-serif;
+}
+.dashboard-title{
+  font-family: 'Verdana', sans-serif;
+}
+.content{
+  font-family: 'Verdana', sans-serif;
+}
+.card-content{
+  font-family: 'Verdana', sans-serif;
+}
+.card-header{
+  font-family: 'Verdana', sans-serif;
+}
+
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.sortable-header {
+  color: black; /* Set the desired text color (e.g., black) */
+  text-decoration: none; /* Remove underlines */
+  cursor: pointer; /* Change the cursor to indicate it's clickable */
+}
+
+.td{
+  font-family: 'Verdana', sans-serif;
+  text-align: center;
+}
+
+.th{
+  font-family:'Verdana', sans-serif;
+  text-align: center;
+}
+
+.sidebar{
+  margin-right: 250px
+}
+
+.has-background-sidebar{
+  background-color: #333
+}

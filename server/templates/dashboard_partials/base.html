@@ -1,0 +1,49 @@
+<!DOCTYPE html5>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/4.9.95/css/materialdesignicons.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'sidebar.css') }}" />
+    <title>{% block title %} {% endblock %}</title>
+</head>
+
+
+<body>
+    {% include 'dashboard_partials/navbar.html' %}
+
+    <div class="container mt-5 mb-5">
+        {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+            <div class="notification is-{{ message['msg_type']}} is-light">
+                <button class="delete"></button>
+                {{ message['text'] }}
+            </div>
+        {% endfor %}
+    {% endwith %}
+        <div>
+            <section class="section title has-background-white-ter mt-5 mb-5">
+                <div class="columns">
+                    {% if back_link %}
+                        <div class="column is-2">
+                            <button class="button" onclick="window.location='{{back_link}}';">
+                                <span class="icon is-large"><i class="mdi mdi-arrow-left-bold"></i></span>
+                                <br><strong>Dashboard</strong>
+                            </button>
+                        </div>
+                    {% endif %}
+                    <div class="column"><div class="title">{{company_name}} / {{page_name}}</div></div>
+                </div>
+            </section>
+          </div>
+        {% block content %} {% endblock %}
+    </div>
+
+</body>
+
+{% include 'partials/footer.html' %}
+
+</html>
