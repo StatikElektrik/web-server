@@ -26,7 +26,17 @@
     {% endwith %}
         <div>
             <section class="section title has-background-white-ter mt-5 mb-5">
-                <div class="title">{{company_name}} / {{page_name}}</div>
+                <div class="columns">
+                    {% if back_link %}
+                        <div class="column is-2">
+                            <button class="button" onclick="window.location='{{back_link}}';">
+                                <span class="icon is-large"><i class="mdi mdi-arrow-left-bold"></i></span>
+                                <br><strong>Dashboard</strong>
+                            </button>
+                        </div>
+                    {% endif %}
+                    <div class="column"><div class="title">{{company_name}} / {{page_name}}</div></div>
+                </div>
             </section>
           </div>
         {% block content %} {% endblock %}
