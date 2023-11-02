@@ -36,7 +36,9 @@ def about_us():
     """It provides the about us page."""
     # Retrieve the project managers from the database.
     project_managers = ProjectManagersHandler().get_all_information()
-    return render_template("about_us.html", members=project_managers, logged_in=session.get("logged_in"))
+    return render_template("about_us.html",
+                           members=project_managers,
+                           logged_in=session.get("logged_in"))
 
 
 @PageRoutes.route("/project_details", methods=["GET"])
@@ -138,6 +140,7 @@ def details():
     customer_id = query_arguments["cid"]
 
     return render_template("details.html",
+        user_name="John Doe",
         company_name="IETT",
         page_name="Vehicle Details",
         image_location="metro_image.png",
@@ -161,6 +164,7 @@ def details():
             "failure_reason": "Piston corrosion on cyclinder 3",
         },
         user_name="John Doe"
+        back_link="/dashboard",
     )
 
 
