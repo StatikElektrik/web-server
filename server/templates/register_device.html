@@ -20,9 +20,9 @@
             <i class="mdi mdi-bus"></i>
           </span>
           <div class="select">
-            <select>
+            <select required name="vehicle_type">
               {% for vehicle_type in vehicle_types %}
-                <option value="{{vehicle_type.id}}">{{vehicle_type.name}}</option>
+                <option value="{{vehicle_type.name}}">{{vehicle_type.name}}</option>
               {% endfor %}
             </select>
           </div>
