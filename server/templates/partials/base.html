@@ -12,6 +12,16 @@
     {% include 'partials/navbar.html' %}
 
     <div class="container mt-5 mb-5">
+        <div class="container mt-5 mb-5">
+            {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <div class="notification is-{{ message['msg_type']}} is-light">
+                    <button class="delete"></button>
+                    {{ message['text'] }}
+                </div>
+            {% endfor %}
+        {% endwith %}
+
         {% block content %} {% endblock %}
     </div>
 </body>

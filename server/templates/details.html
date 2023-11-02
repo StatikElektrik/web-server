@@ -1,0 +1,195 @@
+{% extends 'dashboard_partials/base.html' %}
+
+{% block content %}
+
+<div class="columns">
+   <!-- CAR IMAGE -->
+   <div class="column is-8">
+      <div class="card">
+         <div class="card-content">
+            <div class="media">
+               <div class="media-left">
+                  <img src="/static/images/{{image_location}}" alt="Image" width="500" height="600">
+               </div>
+               <div class="media-content">
+                  <table class="table">
+                     <tbody>
+                        <tr>
+                           <td><p class="is-6"><strong>Vehicle ID</strong></p></td>
+                           <td>{{vehicle_details.vehicle_id}}</td>
+                        </tr>
+                        <tr>
+                           <td><p class="is-6"><strong>Customer ID</strong></p></td>
+                           <td>{{vehicle_details.customer_id}}</td>
+                        </tr>
+                        <tr>
+                           <td><p class="is-6"><strong>Plate</strong></p></td>
+                           <td>{{vehicle_details.plate}}</td>
+                        </tr>
+                        <tr>
+                           <td><p class="is-6"><strong>Type</strong></p></td>
+                           <td>{{vehicle_details.class}}</td>
+                        </tr>
+                        <tr>
+                           <td><p class="is-6"><strong>Assigned Route</strong></p></td>
+                           <td>{{vehicle_details.route}}</td>
+                        </tr>
+                        <tr>
+                           <td><p class="is-6"><strong>Signal Status</strong></p></td>
+                           <td>{{vehicle_details.status}}</td>
+                        </tr>
+                        <tr>
+                           <td><p class="is-6"><strong>Last Location</strong></p></td>
+                           <td>{{vehicle_details.last_location}}</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
+   <div class="column is-4">
+
+      <!-- DRIVER DETAILS -->
+      <div class="columns">
+         <div class="column">
+            <div class="card tile is-child">
+               <header class="card-header">
+                  <p class="card-header-title">
+                     <span class="icon"><i class="mdi mdi-account default"></i></span>
+                     Driver
+                  </p>
+               </header>
+               <div class="card-content">
+                  <div class="media">
+                     <div class="media-left">
+                        <figure class="image is-64x64">
+                           <img class="is-rounded" src="/static/images/{{driver_details.profile_photo}}" width="64", height="64">
+                        </figure>
+                     </div>
+                     <div class="media-content">
+                        <p class="is-6">{{driver_details.name}}<br>{{driver_details.phone}}</p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      
+      <!-- VEHICLE DETAILS -->
+      <div class="columns">
+         <div class="column">
+            <div class="card tile is-child">
+               <div class="card-content">
+                  <nav class="level">
+                     <div class="level-item has-text-centered">
+                       <div>
+                           <p class="heading">Predicted Failure Date & Reason</p>
+                           <p class="title">{{prediction_details.failure_date}}</p>
+                           <p class="heading"><strong>{{prediction_details.failure_reason}}</strong></p>
+                       </div>
+                     </div>
+                  </nav>
+               </div>
+               <footer class="card-footer">
+                  <a href="#" class="card-footer-item">Plan Maintance</a>
+                </footer>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="columns">
+   <div class="column">
+      <div class="card tile is-child">
+         <div class="card-content">
+            <div class="columns">
+               <div class="column">
+                  <canvas id="predictionGraphs" height="300"></canvas>
+               </div>
+               <div class="column">
+                  <canvas id="predictionGraphs2" height="300"></canvas>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+   const xValues = [100,200,300,400,500,600,700,800,900,1000];
+
+   new Chart("predictionGraphs2", {
+      type: 'polarArea',
+      data: {
+         labels: [
+            "Pressure Reduction in the Intake Manifold",
+            "Compression Ratio Reduction in the Cylinders", 
+            "Reduction in the Amount of Fuel Injected into the Cylinders"
+         ],
+         datasets: [{
+            label: 'My First Dataset',
+            data: [11, 16, 7,],
+            backgroundColor: [
+               'rgb(255, 99, 132)',
+               'rgb(75, 192, 192)',
+               'rgb(255, 205, 86)',
+            ],
+            hoverOffset: 4
+         }]
+      },
+      options: {
+         responsive: true,
+         plugins: {
+            legend: {
+               position: 'bottom',
+            },
+         }
+      },
+   });
+
+   new Chart("predictionGraphs", {
+      type: "line",
+      data: {
+         labels: xValues,
+         datasets: [{
+            label: "Pressure Reduction in the Intake Manifold",
+            data: [860,1140,1060,1060,1070,1110,1330,2210,7830,2478],
+            borderColor: 'rgb(255, 99, 132)',
+            fill: false,
+            pointStyle: 'circle',
+            pointRadius: 5,
+            pointHoverRadius: 10,
+         },{
+            label: "Compression Ratio Reduction in the Cylinders",
+            data: [1600,1700,1700,1900,2000,2700,4000,5000,6000,7000],
+            borderColor: 'rgb(75, 192, 192)',
+            fill: false,
+            pointStyle: 'circle',
+            pointRadius: 5,
+            pointHoverRadius: 10,
+         },{
+            label: "Reduction in the Amount of Fuel Injected into the Cylinders",
+            data: [300,700,2000,5000,6000,4000,2000,1000,200,100],
+            borderColor: 'rgb(255, 205, 86)',
+            fill: false,
+            pointStyle: 'circle',
+            pointRadius: 5,
+            pointHoverRadius: 10,
+         }]
+      },
+      options: {
+         plugins: {
+            legend: {
+            position: 'bottom',
+            },
+         }
+
+      }
+   });
+ </script>
+{% endblock %}

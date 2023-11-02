@@ -6,4 +6,13 @@
       is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.
     </p>
   </div>
+
+  <script
+  document.addEventListener('DOMContentLoaded', () => {
+    (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+      const $notification = $delete.parentNode;
+      $delete.addEventListener('click', () => $notification.parentNode.removeChild($notification));
+    });
+  };
+  </script>
 </footer>

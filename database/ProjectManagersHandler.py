@@ -81,5 +81,6 @@ class ProjectManagersHandler:
                 "social_link": person[3],
             }
             people_information.append(person_information)
+            people_information.sort(key=lambda x: x["name_surname"])
 
         return people_information
