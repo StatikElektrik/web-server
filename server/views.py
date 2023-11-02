@@ -163,7 +163,6 @@ def details():
             "failure_date": "05/11/2023",
             "failure_reason": "Piston corrosion on cyclinder 3",
         },
-        user_name="John Doe"
         back_link="/dashboard",
     )
 
