@@ -139,6 +139,16 @@ def details():
     vehicle_id = query_arguments["vid"]
     customer_id = query_arguments["cid"]
 
+    selected_vehicle = None
+    for vehicle in VehiclesHandler().get_all_information():
+        if vehicle["vid"].lower() == vehicle_id.lower():
+            selected_vehicle = vehicle
+            break
+
+    if not selected_vehicle:
+        flash({"text": "Please select a vehicle to view details.", "msg_type": "warning"})
+        return redirect(url_for("PageRoutes.dashboard"))
+
     return render_template("details.html",
         user_name="John Doe",
         company_name="IETT",
@@ -147,12 +157,14 @@ def details():
         vehicle_details={
             "vehicle_id": vehicle_id,
             "customer_id": customer_id,
-            "plate": "34KLM56",
-            "route": "M4.56",
-            "last_date": "2021-05-15",
-            "class": "Metro",
+            "plate": selected_vehicle.get("plate"),
+            "route": selected_vehicle.get("route"),
+            "last_date": selected_vehicle.get("last_date"),
+            "class": selected_vehicle.get("class"),
             "status": "Active",
-            "last_location": "41.00527, 28.97696",
+            "last_location": f"Longitude: {selected_vehicle.get('gps_longitude')}, "
+                             f"Latitude: {selected_vehicle.get('gps_latitude')}",
+            "battery": selected_vehicle.get("battery"),
         },
         driver_details={
             "profile_photo": "bus_driver.jpg",

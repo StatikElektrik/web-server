@@ -17,6 +17,10 @@ class VehiclesHandler:
     COLUMN_ROUTE: str = "route"  # Route Number
     COLUMN_LASTDATE: str = "last_date"  # Last Maintenance Date
     COLUMN_PMDATE: str = "pmdate"  # Predicted Maintenance Date
+    COLUMN_BATTERY: str = "battery"  # Battery Percentage
+    COLUMN_GPS_LAT: str = "gps_lat"  # GPS Latitude
+    COLUMN_GPS_LON: str = "gps_lon"  # GPS Longitude
+
 
     def __init__(self) -> None:
         self.db_handler = create_database_handler()
@@ -39,6 +43,9 @@ class VehiclesHandler:
                 "plate": vehicle[3],
                 "route": vehicle[4],
                 "pmdate": vehicle[6],
+                "battery": vehicle[7],
+                "gps_latitude": vehicle[8],
+                "gps_longitude": vehicle[9],
             }
             vehicles_information.append(vehicle_information)
 
@@ -53,7 +60,6 @@ class VehiclesHandler:
         """
         # Check if the dictionary contains the required keys.
         if not all(
-
             key in device_info for key in ["device_id", "class", "plate", "route", "last_date"]
         ):
             raise ValueError(
@@ -69,12 +75,15 @@ class VehiclesHandler:
 
         # Create a dictionary record to insert into the database.
         device_data_record = {
-            self.COLUMN_DEVICEID: device_info["device_id"],
+            self.COLUMN_DEVICEID: device_info["device_name"],
             self.COLUMN_CLASS: device_info["class"],
             self.COLUMN_PLATE: device_info["plate"],
             self.COLUMN_ROUTE: device_info["route"],
-
             self.COLUMN_LASTDATE: device_info["last_date"],
+            self.COLUMN_BATTERY: 0,
+            self.COLUMN_GPS_LAT: 0,
+            self.COLUMN_GPS_LON: 0,
+            self.COLUMN_PMDATE: "None",
         }
 
         # Insert the new device into the database.
