@@ -7,11 +7,15 @@
    <div class="column is-8">
       <div class="card">
          <div class="card-content">
-            <div class="media">
-               <div class="media-left">
-                  <img src="/static/images/{{image_location}}" alt="Image" width="500" height="600">
+            <div class="columns">
+               <div class="column">
+                  <div class="media">
+                     <div class="media-left">
+                        <img class="image" src="/static/images/{{image_location}}" alt="Image" width="400" height="480">
+                     </div>
+                  </div>
                </div>
-               <div class="media-content">
+               <div class="column">
                   <table class="table">
                      <tbody>
                         <tr>
@@ -49,7 +53,7 @@
    <div class="column is-4">
 
       <!-- DRIVER DETAILS -->
-      <div class="columns">
+      <div class="columns is-desktop">
          <div class="column">
             <div class="card tile is-child">
                <header class="card-header">
